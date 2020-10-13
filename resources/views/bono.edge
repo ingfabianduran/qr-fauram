@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5">
+        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Información del Cliente</h3>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
+        <div class="col-sm-12 col-md-12 col-lg-11 col-xl-11">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Generar Bono</h3>
@@ -106,6 +106,82 @@
                                     <button type="button" class="btn btn-block btn-primary">Imprimir QR</button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Recargar Bono</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 text-center">
+                            <img src="{{assetsUrl('img/qr.png')}}" width="200" height="200" class="rounded">
+                            <div class="mt-2"> 
+                                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected">Lista de camaras</option>
+                                    <option>Camara 1</option>
+                                    <option>Camara 2</option>
+                                </select> 
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5 d-flex align-items-center">
+                            <form>
+                                <div class="form-group row">
+                                    <label class="col-sm-7 font-weight-bold">Id bono:</label>
+                                    <div class="col-sm-5 text-right align-self-center">
+                                        <span>160</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-dollar-sign"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Valor del bono">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-block btn-success">Actualizar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Redimir o Pagar con Bono</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 text-center">
+                            <img src="{{assetsUrl('img/qr.png')}}" width="200" height="200" class="rounded">
+                            <div class="mt-2"> 
+                                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected">Lista de camaras</option>
+                                    <option>Camara 1</option>
+                                    <option>Camara 2</option>
+                                </select> 
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5 align-self-center">
+                            <form>
+                                <div class="form-group row">
+                                    <label class="col-sm-7 font-weight-bold">Id bono:</label>
+                                    <div class="col-sm-5 text-right">
+                                        <span>260</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-block btn-success">Actualizar</button>
+                            </form>
                         </div>
                     </div>
                 </div>

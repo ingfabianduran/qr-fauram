@@ -16,7 +16,7 @@ module.exports = {
   | interacting with SQL databases.
   |
   */
-  connection: Env.get('DB_CONNECTION', 'sqlite'),
+  connection: Env.get('DB_CONNECTION', 'mysql'),
 
   /*
   |--------------------------------------------------------------------------
@@ -28,7 +28,6 @@ module.exports = {
   |
   | npm i --save sqlite3
   |
-  */
   sqlite: {
     client: 'sqlite3',
     connection: {
@@ -48,16 +47,15 @@ module.exports = {
   |
   */
   mysql: {
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
       host: Env.get('DB_HOST', 'localhost'),
-      port: Env.get('DB_PORT', ''),
+      port: Env.get('DB_PORT', '3306'),
       user: Env.get('DB_USER', 'root'),
       password: Env.get('DB_PASSWORD', ''),
-      database: Env.get('DB_DATABASE', 'adonis')
+      database: Env.get('DB_DATABASE', 'bonos')
     }
   },
-
   /*
   |--------------------------------------------------------------------------
   | PostgreSQL
@@ -67,7 +65,7 @@ module.exports = {
   |
   | npm i --save pg
   |
-  */
+  
   pg: {
     client: 'pg',
     connection: {
@@ -78,4 +76,5 @@ module.exports = {
       database: Env.get('DB_DATABASE', 'adonis')
     }
   }
+  */
 }

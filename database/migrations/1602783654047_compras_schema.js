@@ -8,7 +8,7 @@ class ComprasSchema extends Schema {
     this.create('compras', (table) => {
       table.increments()
       table.enu('tipo', ['Regalo', 'Recarga', 'Recarga valor']).notNullable()
-      table.decimal('valor', 2).notNullable()
+      table.decimal('valor').notNullable()
       table.integer('cliente_id').unsigned().references('id').inTable('clientes').notNullable()
       table.integer('bono_id').unsigned().references('id').inTable('bonos').notNullable()
       table.timestamps()

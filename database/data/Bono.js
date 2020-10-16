@@ -1,7 +1,14 @@
 const DATA_BONO = {
-    async generar_bonos(max_clientes, n_bonos) {
-
+    generar_bono(tipo_bono, contenido, id) {
+        const faker = require('faker');
+        const bono = {
+            tipo: tipo_bono,
+            contenido: contenido,
+            saldo: faker.random.number({min: 10000, max: 99999}),
+            cliente_id: id
+        };
+        return bono;
     }
 };
 
-module.export = DATA_CLIENTE;
+module.exports = DATA_BONO;

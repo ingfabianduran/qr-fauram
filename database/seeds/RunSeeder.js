@@ -17,8 +17,8 @@ class RunSeeder {
   async run () {
     const data_compra = require('../data/Compra');
     try {
-      await data_compra.generar_bonos(10, 'Regalo');
-      await data_compra.generar_bonos(10, 'Recarga'); 
+      await data_compra.generar_bonos(5, 'Regalo', 5);
+      await data_compra.generar_bonos(10, 'Recarga', null); 
       console.log('###### Registros creados correctamente!!!!! ######');
     } catch (error) {
       console.log(error);

@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    $('.select2').select2({
-        
-    });
+    // Init plugin select2: 
+    $('.select2').select2();
+    // Validate if exists camera's: 
+    get_cameras();
 });

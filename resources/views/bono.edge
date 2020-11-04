@@ -39,7 +39,14 @@
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-11 col-xl-11">
-            <div class="card">
+            <div id="container_infos" class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">Generar Bono</h1>
+                    <p class="lead">Para generar un bono por favor agregue o consulte un cliente en el boton que se encuentra a continuación:</p>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_add_cliente">Gestionar Cliente</button>
+                </div>
+            </div>
+            <div id="container_create_bono" class="card d-none">
                 <div class="card-header">
                     <h3 class="card-title">Generar Bono</h3>
                 </div>
@@ -84,26 +91,27 @@
                                 </div>
                                 <div class="row">
                                     <div class="col d-flex justify-content-end">
-                                        <button type="button" class="btn btn-success">Registrar</button>
+                                        <button type="button" class="btn btn-success btn-lg">Registrar</button>
                                     </div>
                                     <div class="col">
-                                        <button type="button" class="btn btn-danger">Cancelar</button>
+                                        <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2 text-center mt-2">
-                            <img src="{{assetsUrl('img/qr.png')}}" width="150" height="150" class="rounded">
+                            <i class="fas fa-qrcode fa-10x"></i>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 align-self-center text-center mt-2">
-                            <div class="row">
+                            <div class="row">   
                                 <div class="col">
-                                    <button type="button" class="btn btn-block btn-primary">Enviar QR</button>
+                                        <button type="button" class="btn btn-block btn-primary">Enviar QR</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mt-1">
-                                <div class="col">
-                                    <button type="button" class="btn btn-block btn-primary">Imprimir QR</button>
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <button type="button" class="btn btn-block btn-primary">Imprimir QR</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -121,6 +129,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 text-center">
+                            <i class="fas fa-video fa-10x d-none"></i>
                             <div class="embed-responsive embed-responsive-1by1">
                                 <video id="video_recargar" class="embed-responsive-item"></video>
                             </div>
@@ -164,6 +173,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 text-center">
+                            <i class="fas fa-video fa-10x d-none"></i>
                             <div class="embed-responsive embed-responsive-1by1">
                                 <video id="video_redimir" class="embed-responsive-item"></video>
                             </div>

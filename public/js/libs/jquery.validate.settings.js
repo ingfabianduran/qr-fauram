@@ -10,12 +10,8 @@ jQuery.validator.setDefaults({
     errorElement: 'div',
     errorClass: 'invalid-feedback',
     errorPlacement: function (error, element) {
-        if (element.parent('.form-group').parent('.col').length) {
-            element.parent('.form-group').parent('.col').append(error);
-        } else if (element.parent('.dropdown.bootstrap-select.form-control').parent('.form-group').parent('.col').length) {
-            element.parent('.dropdown.bootstrap-select.form-control').parent('.form-group').parent('.col').append(error);
-        } else if (element.parent('.form-group.input-group.mb-3')) {
-            element.parent('.form-group.input-group.mb-3').append(error);
+        if (element.parent('.form-group').length) {
+            element.parent('.form-group').append(error);
         }
     },
 });

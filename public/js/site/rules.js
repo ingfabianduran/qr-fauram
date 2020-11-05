@@ -30,13 +30,28 @@ function get_rules() {
                 digits: true
             },
             add_nombre_redimir: {
-                required: true,
+                required: {
+                    depends: function(element) {
+                        if ($('#tipo_bono').val() === 'Regalo') {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                },
                 rangelength: [3, 60]
             },
             add_correo_redimir: {
                 email: true
             }
         },
+        bono_recargar: {
+            valor_recarga: {
+                required: true,
+                digits: true
+            }
+        }
     };
     return rules;
 }

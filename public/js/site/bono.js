@@ -9,15 +9,8 @@ $(document).ready(function() {
     validate_form('form_add_cliente', get_rules().cliente, '¿Desea registrar un cliente?', null, null, null);
     // Reset values by form add cliente: 
     reset_form_by_modal('modal_add_cliente', 'form_add_cliente');
-});
-
-$('#tipo_bono').on('select2:select', function (e) { 
-    const tipo_bono = e.params.data.text;
-    if (tipo_bono === 'Recarga') {
-        const rules = get_rules().bono;
-        validate_form('form_add_bono', rules, '¿Desea registrar un bono recarga?', null, null, null);
-    } else if (tipo_bono === 'Regalo') {
-        const rules = get_rules().bono;
-        validate_form('form_add_bono', rules, '¿Desea registrar un bono regalo?', null, null, null);
-    }  
+    // Post add bono:
+    validate_form('form_add_bono', get_rules().bono, '¿Desea registrar un bono?', null, null, null);
+    // Post recargar bono: 
+    validate_form('form_recargar_bono', get_rules().bono_recargar, '¿Desea recargar el bono?', null, null, null);
 });

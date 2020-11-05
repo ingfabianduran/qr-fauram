@@ -57,10 +57,10 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group"> 
-                                            <select id="tipo_bono" name="tipo_bono" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                                <option selected="selected">Tipo de bono</option>
-                                                <option>Recarga</option>
-                                                <option>Regalo</option>
+                                            <select id="tipo_bono" name="tipo_bono" class="form-control select2 select2-hidden-accessible has-error" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                <option value="" selected="selected">Tipo de bono</option>
+                                                <option value="recarga">Recarga</option>
+                                                <option value="regalo">Regalo</option>
                                             </select> 
                                         </div>
                                     </div>
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5 align-self-center">
-                            <form>
+                            <form id="form_recargar_bono">
                                 <div class="form-group row">
                                     <label class="col-sm-7 font-weight-bold">Id bono:</label>
                                     <div class="col-sm-5 text-right">
@@ -154,10 +154,10 @@
                                                 <i class="fas fa-dollar-sign"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Valor del bono">
+                                        <input id="valor_recarga" name="valor_recarga" type="text" class="form-control" placeholder="Valor de la recarga">
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-block btn-success">Actualizar</button>
+                                <button type="submit" class="btn btn-block btn-success">Actualizar</button>
                                 <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cancelar</button>
                             </form>
                         </div>

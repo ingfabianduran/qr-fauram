@@ -12,6 +12,10 @@ jQuery.validator.setDefaults({
     errorPlacement: function (error, element) {
         if (element.parent('.form-group').length) {
             element.parent('.form-group').append(error);
+        } else if (element.parent('.input-group').length) {
+            element.parent('.input-group').append(error);
+        } else if (element.hasClass('select2')) {     
+            $(element).next().append(error);
         }
     },
 });

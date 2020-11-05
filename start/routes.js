@@ -22,3 +22,7 @@ Route.group(() => {
     Route.get('', 'BonoController.index');
     Route.get('add', 'BonoController.add_bono');
 }).prefix('/bono/');
+
+Route.group(() => {
+    Route.get('search/:ident', 'ClienteController.search_cliente');
+}).prefix('/cliente/');

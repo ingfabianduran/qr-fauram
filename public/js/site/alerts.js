@@ -18,7 +18,6 @@ function show_small_alert (icon, message, url, container) {
             }
         }
     });
-
     Toast.fire({
         icon: icon,
         title: message

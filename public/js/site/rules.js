@@ -2,22 +2,22 @@
 function get_rules() {
     const rules = {
         cliente: {
-            identificacion_cliente: {
+            identificacion: {
                 required: true,
                 digits: true
             },
-            nombre_cliente: {
+            nombre: {
                 required: true,
                 rangelength: [3, 60]
             },
-            apellido_cliente: {
+            apellido: {
                 required: true,
                 rangelength: [3, 60]
             },
-            contacto_cliente: {
+            contacto: {
                 digits: true
             },
-            correo_cliente: {
+            correo: {
                 email: true
             }
         }, 

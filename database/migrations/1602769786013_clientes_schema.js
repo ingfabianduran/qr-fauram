@@ -10,8 +10,8 @@ class ClientesSchema extends Schema {
       table.bigInteger('identificacion').unique().notNullable()
       table.string('nombre', 60).notNullable()
       table.string('apellido', 60).notNullable()
-      table.string('contacto', 12)
-      table.string('correo', 80)
+      table.string('contacto', 10)
+      table.string('correo', 45)
       table.timestamps()
     })
   }

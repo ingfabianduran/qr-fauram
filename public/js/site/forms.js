@@ -1,3 +1,13 @@
+function serializarForm(id_form) {
+    const form = document.getElementById(id_form);
+    const form_data = new FormData(form);
+    let obj = {};
+    for (const key of form_data.keys()) {
+        obj[key] = form_data.get(key);
+    }
+    return obj;
+}
+
 // Reset any form's: 
 function reset_form_by_modal(modal, form) {
     if (modal === null || modal === '') {

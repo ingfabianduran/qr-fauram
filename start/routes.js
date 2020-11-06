@@ -25,4 +25,5 @@ Route.group(() => {
 
 Route.group(() => {
     Route.get('search/:ident', 'ClienteController.search_cliente');
+    Route.post('add', 'ClienteController.add_cliente');
 }).prefix('/cliente/');

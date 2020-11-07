@@ -1,3 +1,4 @@
+// Serialize any form's: 
 function serializarForm(id_form) {
     const form = document.getElementById(id_form);
     const form_data = new FormData(form);
@@ -7,9 +8,8 @@ function serializarForm(id_form) {
     }
     return obj;
 }
-
-// Reset any form's: 
-function reset_form_by_modal(modal, form) {
+// Reset form by event: 
+function reset_form_by_event(modal, form) {
     if (modal === null || modal === '') {
         $(`#${form} :button.btn.btn-danger`).click(function(){
             $(`#${form} .invalid-feedback`).remove()
@@ -27,4 +27,12 @@ function reset_form_by_modal(modal, form) {
             $(`#${form} .select2`).val(null).trigger('change');
         });
     }
+}
+// Reset form by event http:
+function reset_form_by_http(id_form) {
+    $(`#${form} .invalid-feedback`).remove()
+    $(`#${form} input`).removeClass('is-valid');
+    $(`#${form} input`).removeClass('is-invalid');
+    document.getElementById(form).reset();
+    $(`#${form} .select2`).val(null).trigger('change');
 }

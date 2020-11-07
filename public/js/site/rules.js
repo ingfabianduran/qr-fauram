@@ -22,14 +22,14 @@ function get_rules() {
             }
         }, 
         bono: {
-            tipo_bono: {
+            tipo: {
                 required: true
             },
-            valor_bono: {
+            saldo: {
                 required: true,
                 digits: true
             },
-            add_nombre_redimir: {
+            nombre_completo: {
                 required: {
                     depends: function(element) {
                         if ($('#tipo_bono').val() === 'Regalo') {
@@ -42,7 +42,7 @@ function get_rules() {
                 },
                 rangelength: [3, 60]
             },
-            add_correo_redimir: {
+            correo: {
                 email: true
             }
         },

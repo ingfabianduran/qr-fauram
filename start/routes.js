@@ -20,7 +20,7 @@ const Route = use('Route')
 
 Route.group(() => {
     Route.get('', 'BonoController.index');
-    Route.get('add', 'BonoController.add_bono');
+    Route.post('add', 'BonoController.validate_bono');
 }).prefix('/bono/');
 
 Route.group(() => {

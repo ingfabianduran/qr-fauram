@@ -11,7 +11,7 @@ class RedimidosSchema extends Schema {
       table.string('nombre_completo', 60).notNullable()
       table.decimal('valor').notNullable()
       table.string('contacto', 12)
-      table.string('correo', 80)
+      table.string('correo', 45)
       table.integer('bono_id').unsigned().references('id').inTable('bonos').notNullable()
       table.timestamps()
     })

@@ -54,13 +54,14 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7">
                             <form id="form_add_bono">
+                                <input type="hidden" id="cliente_id" name="cliente_id" value="">
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group"> 
-                                            <select id="tipo_bono" name="tipo_bono" class="form-control select2 select2-hidden-accessible has-error" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <select id="tipo" name="tipo" class="form-control select2 select2-hidden-accessible has-error" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                                 <option value="" selected="selected">Tipo de bono</option>
-                                                <option value="recarga">Recarga</option>
-                                                <option value="regalo">Regalo</option>
+                                                <option value="Recarga">Recarga</option>
+                                                <option value="Regalo">Regalo</option>
                                             </select> 
                                         </div>
                                     </div>
@@ -72,7 +73,7 @@
                                                         <i class="fas fa-dollar-sign"></i>
                                                     </span>
                                                 </div>
-                                                <input id="valor_bono" name="valor_bono" type="text" class="form-control" placeholder="Valor del bono">
+                                                <input id="saldo" name="saldo" type="text" class="form-control" placeholder="Valor del bono">
                                             </div>
                                         </div>
                                     </div>
@@ -80,12 +81,12 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <input id="add_nombre_redimir" name="add_nombre_redimir" type="text" class="form-control" placeholder="Nombre de quien va a redimir">
+                                            <input id="nombre_completo" name="nombre_completo" type="text" class="form-control" placeholder="Nombre de quien va a redimir">
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <input id="add_correo_redimir" name="add_correo_redimir" type="text" class="form-control" placeholder="Correo de quien va a redimir">
+                                            <input id="correo" name="correo" type="text" class="form-control" placeholder="Correo de quien va a redimir">
                                         </div>
                                     </div>
                                 </div>
@@ -100,17 +101,17 @@
                             </form>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2 text-center mt-2">
-                            <i class="fas fa-qrcode fa-10x"></i>
+                            <img id="image_qr" src="{{assetsUrl('img/qr.png')}}" width="150" height="150" class="rounded">
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 align-self-center text-center mt-2">
                             <div class="row">   
                                 <div class="col">
-                                        <button type="button" class="btn btn-block btn-primary">Enviar QR</button>
+                                        <button type="button" class="btn btn-block btn-primary disabled">Enviar QR</button>
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col">
-                                        <button type="button" class="btn btn-block btn-primary">Imprimir QR</button>
+                                        <button type="button" class="btn btn-block btn-primary disabled">Imprimir QR</button>
                                     </div>
                                 </div>
                             </div>

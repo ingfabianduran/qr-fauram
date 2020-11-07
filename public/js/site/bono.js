@@ -6,9 +6,11 @@ $(document).ready(function() {
     // Post form add cliente: 
     validate_form_cliente('form_add_cliente', get_rules().cliente, '¿Desea registrar un cliente?', '/cliente/add');
     // Reset values by form add cliente: 
-    reset_form_by_modal('modal_add_cliente', 'form_add_cliente');
+    reset_form_by_event('modal_add_cliente', 'form_add_cliente');
     // Focus out by search cliente: 
     get_data_search_cliente();
+    // Post form add bono: 
+    validate_form_add_bono('form_add_bono', get_rules().bono, '¿Desea registrar el bono?', '/bono/add');
 });
 // Event lost focus in input identificacion: 
 function get_data_search_cliente() {
@@ -26,7 +28,7 @@ function get_data_search_cliente() {
         });
     });
 }
-// Validate forms:
+// Validate form cliente:
 function validate_form_cliente(id_form, rules, message_confirm, url) {
     $(`#${id_form}`).validate({
         rules: rules,
@@ -46,13 +48,37 @@ function validate_form_cliente(id_form, rules, message_confirm, url) {
         }
     });
 }
+// validate form add_bono:
+function validate_form_add_bono(id_form, rules, message_confirm, url) {
+    $(`#${id_form}`).validate({
+        rules: rules,
+        submitHandler: function() {
+            show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Registrar', function(confirm) {
+                if (confirm) {
+                    load_preloader_container(id_form, 30);
+                    const data = serializarForm(id_form);
+                    const response = post(url, data);
+                    response.then((res) => {
+                        stop_preloader(id_form, 1000);
+                        toastr.success(res.message);
+                        document.getElementById('image_qr').src = res.data.qr;
+                    }).catch((err) => {
+                        stop_preloader(id_form, 1000);
+                        toastr.error(err.message);
+                    });       
+                }
+            });
+        }
+    });
+}
 // Set info card cliente:
 function set_data_cliente(data) {
+    document.getElementById('cliente_id').value = data.id;
     document.getElementById('buscar_cliente_identificacion').innerText = data.identificacion;
     document.getElementById('buscar_cliente_nombre').innerText = data.nombre;
     document.getElementById('buscar_cliente_apellido').innerText = data.apellido;
 }
-
+// Event's when validate or register cliente: 
 function events_register_cliente(message) {
     $('#modal_add_cliente').modal('hide');
     toastr.success(message);

@@ -9,6 +9,7 @@ class BonosSchema extends Schema {
       table.increments()
       table.enu('tipo', ['Regalo', 'Recarga']).notNullable()
       table.text('contenido', 'longtext').unique().notNullable()
+      table.string('correo', 45)
       table.decimal('saldo').notNullable()
       table.integer('cliente_id').unsigned().references('id').inTable('clientes').notNullable()
       table.timestamps()

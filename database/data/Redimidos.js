@@ -11,7 +11,6 @@ const DATA_REDIMIDOS = {
                 nombre_completo: faker.name.findName(),
                 valor: faker.random.number({min: 1000, max: bono.saldo}),
                 contacto: faker.phone.phoneNumberFormat(),
-                correo: faker.internet.email(),
                 bono_id: bono.id
             };
             const redimido = await Redimido.create(data_redimido);
@@ -26,7 +25,6 @@ const DATA_REDIMIDOS = {
                 nombre_completo: `${cliente.nombre} ${cliente.apellido}`,
                 valor: faker.random.number({min: 1000, max: bono.saldo}),
                 contacto: cliente.contacto,
-                correo: cliente.correo,
                 bono_id: bono.id
             };
             const redimido = await Redimido.create(data_redimido);

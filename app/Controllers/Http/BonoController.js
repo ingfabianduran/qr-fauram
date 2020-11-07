@@ -34,6 +34,7 @@ class BonoController {
             tipo: bono.tipo,
             contenido: `${bono.cliente_id}-${moment().format()}-${faker.random.number()}`,
             saldo: bono.saldo,
+            correo: bono.correo,
             cliente_id: bono.cliente_id
         }
         try {

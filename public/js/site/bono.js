@@ -11,8 +11,6 @@ $(document).ready(function() {
     get_data_search_cliente();
     // Post form add bono: 
     validate_form_add_bono('form_add_bono', get_rules().bono, '¿Desea registrar el bono?', '/bono/add');
-    
-    generate_pdf();
 });
 // Event lost focus in input identificacion: 
 function get_data_search_cliente() {
@@ -64,6 +62,8 @@ function validate_form_add_bono(id_form, rules, message_confirm, url) {
                         stop_preloader(id_form, 1000);
                         toastr.success(res.message);
                         document.getElementById('image_qr').src = res.data.qr;
+                        reset_form_by_http(id_form);
+                        print_bono(res.data.bono);
                     }).catch((err) => {
                         stop_preloader(id_form, 1000);
                         toastr.error(err.message);
@@ -71,6 +71,18 @@ function validate_form_add_bono(id_form, rules, message_confirm, url) {
                 }
             });
         }
+    });
+}
+
+function print_bono(bono) {
+    const bt_print_bono = document.getElementById('bt_imprimir_pdf');
+    bt_print_bono.classList.remove('disabled');
+    bt_print_bono.addEventListener('click', (e) => {
+        show_alert_confirm('Esta seguro???', '¿Desea imprimir el bono?', 'question', 'Generar PDF', function(confirm) {
+            if (confirm) {
+                
+            }
+        }); 
     });
 }
 // Set info card cliente:
@@ -86,50 +98,4 @@ function events_register_cliente(message) {
     toastr.success(message);
     document.getElementById('container_create_bono').classList.remove('d-none');
     document.getElementById('container_info').classList.add('d-none');
-}
-
-function generate_pdf() {
-    const pdf_content = {
-        content: [
-            {
-                text: 'QR Recargable',
-                style: 'type_bono'
-            },
-            {
-                text: 'Hola Fabian Esteban Duran A',
-                style: 'user'
-            },
-            {
-                text: 'Compraste un Código QR que puedes recargar. Ahora puedes usarlo como medio de pago en nuestras instalaciones.',
-                style: 'body'
-            },
-            {
-                text: 'Franklin Ramos Salon \n Cra 13 #77a-65 \n 3132859321',
-                style: 'footer'
-            }
-        ],
-        styles: {
-            type_bono: {
-                fontSize: 30,
-                bold: true               
-            },
-            user: {
-                fontSize: 25,
-                bold: true,
-                margin: [20, 160, 20, 20] // [left, top, right, bottom]
-            },
-            body: {
-                fontSize: 20,
-                alignment: 'justify',
-                margin: [20, 5, 20, 0]
-            },
-            footer: {
-                fontSize: 15,
-                alignment: 'center',
-                margin: [0, 380, 0, 0]
-            }
-        }
-    };
-
-    pdfMake.createPdf(pdf_content).download();
 }

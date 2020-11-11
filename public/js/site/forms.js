@@ -29,7 +29,7 @@ function reset_form_by_event(modal, form) {
     }
 }
 // Reset form by event http:
-function reset_form_by_http(id_form) {
+function reset_form_by_http(form) {
     $(`#${form} .invalid-feedback`).remove()
     $(`#${form} input`).removeClass('is-valid');
     $(`#${form} input`).removeClass('is-invalid');

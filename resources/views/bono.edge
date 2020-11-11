@@ -60,8 +60,9 @@
                                         <div class="form-group"> 
                                             <select id="tipo" name="tipo" class="form-control select2 select2-hidden-accessible has-error" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                                 <option value="" selected="selected">Tipo de bono</option>
-                                                <option value="Recarga">Recarga</option>
-                                                <option value="Regalo">Regalo</option>
+                                                @each(tipo in tipo_bono)
+                                                    <option value="{{ tipo.value }}">{{ tipo.text }}</option>
+                                                @endeach
                                             </select> 
                                         </div>
                                     </div>
@@ -111,7 +112,7 @@
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col">
-                                        <button type="button" class="btn btn-block btn-primary disabled">Imprimir QR</button>
+                                        <button id="bt_imprimir_pdf" type="button" class="btn btn-block btn-primary disabled">Imprimir QR</button>
                                     </div>
                                 </div>
                             </div>

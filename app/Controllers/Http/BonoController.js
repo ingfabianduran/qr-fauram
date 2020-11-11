@@ -10,7 +10,12 @@ const faker = require('faker');
 
 class BonoController {
     index({view}) {
-        return view.render('bono');
+        const tipo_bono = [
+            { value: 'Recarga', text: 'Recarga' },
+            { value: 'Regalo', text: 'Regalo' }
+        ];
+
+        return view.render('bono', {tipo_bono});
     }
 
     async validate_bono({request, response}) {
@@ -53,6 +58,15 @@ class BonoController {
             return qr;
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    async get_info_by_pdf({request, response}) {
+        const data_bono = request.params.id; 
+        try {
+            const bono = await Bono.find(data_bono);
+        } catch (error) {
+            
         }
     }
 }

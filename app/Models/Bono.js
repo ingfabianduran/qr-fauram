@@ -4,8 +4,12 @@
 const Model = use('Model')
 
 class Bono extends Model {
-    cliente() {
+    clientes() {
         return this.belongsTo('App/Models/Cliente');
+    }
+
+    redimidos() {
+        return this.hasMany('App/Models/Cliente');
     }
 }
 

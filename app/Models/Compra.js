@@ -4,7 +4,7 @@
 const Model = use('Model')
 
 class Compra extends Model {
-    cliente() {
+    clientes() {
         return this.belongsTo('App/Models/Cliente');
     }
 }

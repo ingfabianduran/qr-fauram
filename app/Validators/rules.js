@@ -10,7 +10,7 @@ const rules = {
         cliente_id: 'required|integer',
         tipo: 'required|in:Regalo,Recarga',
         saldo: 'required|integer',
-        nombre_completo: 'required_when:tipo,Regalo',
+        quien_redime: 'required_when:tipo,Regalo',
         correo: 'email|max:45'
     }
 };

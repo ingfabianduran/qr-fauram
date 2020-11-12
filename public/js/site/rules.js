@@ -29,10 +29,10 @@ function get_rules() {
                 required: true,
                 digits: true
             },
-            nombre_completo: {
+            quien_redime: {
                 required: {
                     depends: function(element) {
-                        if ($('#tipo_bono').val() === 'Regalo') {
+                        if ($('#tipo').val() === 'Regalo') {
                             return true;
                         }
                         else {

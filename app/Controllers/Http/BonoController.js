@@ -39,12 +39,13 @@ class BonoController {
             tipo: bono.tipo,
             contenido: `${bono.cliente_id}-${moment().format()}-${faker.random.number()}`,
             saldo: bono.saldo,
+            quien_redime: bono.quien_redime,
             correo: bono.correo,
             cliente_id: bono.cliente_id
         }
         try {
-            const bono = await Bono.create(data_bono);
-            const json_bono = bono.toJSON();
+            const new_bono = await Bono.create(data_bono);
+            const json_bono = new_bono.toJSON();
             return json_bono
         } catch (error) {
             console.log(error);
@@ -57,16 +58,19 @@ class BonoController {
             const qr = await qr_code.toDataURL(contenido);
             return qr;
         } catch (error) {
-            console.log(error);
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
         }
     }
 
     async get_info_by_pdf({request, response}) {
         const data_bono = request.params.id; 
         try {
-            const bono = await Bono.find(data_bono);
+            const bono = await Bono.query().with('clientes').where({ 'id': data_bono }).fetch();
+            const json_bono = bono.toJSON();
+            const qr = await this.create_qr(json_bono[0].contenido);
+            response.send({ status: true, data: { bono: json_bono, qr: qr } });
         } catch (error) {
-            
+            response.send({ status: false, message: `Error: ${error.code}` }); 
         }
     }
 }

@@ -80,7 +80,19 @@ function print_bono(bono) {
     bt_print_bono.addEventListener('click', (e) => {
         show_alert_confirm('Esta seguro???', '¿Desea imprimir el bono?', 'question', 'Generar PDF', function(confirm) {
             if (confirm) {
-                
+                const url = `/bono/print/${bono.id}`;
+                const info_bono = get(url); 
+                info_bono.then((res) => {
+                    let pdf_content = [];
+                    if (res.data.bono[0].tipo === 'Regalo') pdf_content = generate_pdf_regalo(res.data);
+                    else if (res.data.bono[0].tipo === 'Recarga') pdf_content = generate_pdf_recarga(res.data);
+                    try { 
+                        pdfMake.createPdf(pdf_content).download(); 
+                    } 
+                    catch (error) { 
+                        toastr.error(error.code);
+                    }      
+                });
             }
         }); 
     });

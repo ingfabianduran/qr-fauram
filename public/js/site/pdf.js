@@ -1,5 +1,5 @@
 // PDF para recarga: 
-function generate_pdf_recarga() {
+function generate_pdf_recarga(data) {
     const pdf_content = {
         content: [
             {
@@ -21,10 +21,10 @@ function generate_pdf_recarga() {
         ],
         styles: get_styles()
     };
-    pdfMake.createPdf(pdf_content).download();
+    return pdf_content;
 }
 // PDF para regalo: 
-function generate_pdf_regalo() {
+function generate_pdf_regalo(data) {
     const pdf_content = {
         content: [
             {
@@ -46,7 +46,7 @@ function generate_pdf_regalo() {
         ],
         styles: get_styles()
     };
-    pdfMake.createPdf(pdf_content).download();
+    return pdf_content;
 }
 // Style's by PDF: 
 function get_styles() {

@@ -4,11 +4,11 @@
 const Model = use('Model')
 
 class Cliente extends Model {
-    compra() {
+    compras() {
         return this.hasMany('App/Models/Compra');
     }
 
-    Bono() {
+    bonos() {
         return this.hasMany('App/Models/Bono');
     }
 }

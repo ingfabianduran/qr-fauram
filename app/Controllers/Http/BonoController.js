@@ -68,7 +68,7 @@ class BonoController {
             const bono = await Bono.query().with('clientes').where({ 'id': data_bono }).fetch();
             const json_bono = bono.toJSON();
             const qr = await this.create_qr(json_bono[0].contenido);
-            response.send({ status: true, data: { bono: json_bono, qr: qr } });
+            response.send({ status: true, message: 'PDF generado correctamente', data: { bono: json_bono, qr: qr } });
         } catch (error) {
             response.send({ status: false, message: `Error: ${error.code}` }); 
         }

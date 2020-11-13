@@ -73,7 +73,7 @@ function validate_form_add_bono(id_form, rules, message_confirm, url) {
         }
     });
 }
-
+// Print PDF by QR code: 
 function print_bono(bono) {
     const bt_print_bono = document.getElementById('bt_imprimir_pdf');
     bt_print_bono.classList.remove('disabled');
@@ -83,15 +83,15 @@ function print_bono(bono) {
                 const url = `/bono/print/${bono.id}`;
                 const info_bono = get(url); 
                 info_bono.then((res) => {
-                    let pdf_content = [];
-                    if (res.data.bono[0].tipo === 'Regalo') pdf_content = generate_pdf_regalo(res.data);
-                    else if (res.data.bono[0].tipo === 'Recarga') pdf_content = generate_pdf_recarga(res.data);
-                    try { 
+                    try {
+                        let pdf_content = [];
+                        if (res.data.bono[0].tipo === 'Regalo') pdf_content = generate_pdf_regalo(res.data);
+                        else if (res.data.bono[0].tipo === 'Recarga') pdf_content = generate_pdf_recarga(res.data);
+                        toastr.success(res.message);
                         pdfMake.createPdf(pdf_content).download(); 
-                    } 
-                    catch (error) { 
-                        toastr.error(error.code);
-                    }      
+                    } catch (error) {
+                        toastr.error(error);
+                    }
                 });
             }
         }); 

@@ -1,5 +1,7 @@
+const messages = require("../../../app/Validators/messages");
+
 // PDF para recarga: 
-function generate_pdf_recarga(data) {
+function content_pdf_recarga(data) {
     const pdf_content = {
         content: [
             {
@@ -28,7 +30,7 @@ function generate_pdf_recarga(data) {
     return pdf_content;
 }
 // PDF para regalo: 
-function generate_pdf_regalo(data) {
+function content_pdf_regalo(data) {
     const pdf_content = {
         content: [
             {
@@ -52,7 +54,7 @@ function generate_pdf_regalo(data) {
                 style: 'footer'
             }
         ],
-        styles: get_styles()
+        styles: get_styles(),
     };
     return pdf_content;
 }
@@ -61,17 +63,20 @@ function get_styles() {
     const styles = {
         type_bono: {
             fontSize: 30,
-            bold: true,               
+            bold: true, 
+            font: 'BarlowCondensed'
         },
         user: {
             fontSize: 25,
             bold: true,
-            margin: [20, 160, 20, 20]
+            margin: [20, 160, 20, 20],
+            font: 'BarlowCondensed'
         },
         body: {
             fontSize: 20,
             alignment: 'justify',
-            margin: [20, 5, 20, 0]
+            margin: [20, 5, 20, 0],
+            font: 'BarlowCondensed'
         },
         qr: {
             alignment: 'center',
@@ -80,8 +85,29 @@ function get_styles() {
         footer: {
             fontSize: 15,
             alignment: 'center',
-            margin: [0, 180, 0, 0]
+            margin: [0, 180, 0, 0],
+            font: 'BarlowCondensed'
         }
     };
     return styles;
+}
+// Download pdf: 
+function download_pdf(tipo, data, message) {
+    try {
+        pdfMake.fonts = {
+            BarlowCondensed: {
+                    normal: 'BarlowCondensed-Regular',
+                    bold: 'BarlowCondensed-Bold',
+                    italics: 'BarlowCondensed-Italic',
+                    bolditalics: 'BarlowCondensed-BoldItalic'
+            }
+        };
+        
+        if (tipo === 'Regalo') pdfMake.createPdf(content_pdf_regalo(data)).download();
+        else if (tipo === 'Recarga') pdfMake.createPdf(content_pdf_recarga(data)).download();
+        else toastr.error('Faltan datos por generar');
+        toastr.success(message);
+    } catch (error) {
+        toastr.error(error);
+    }
 }

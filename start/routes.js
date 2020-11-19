@@ -21,6 +21,7 @@ const Route = use('Route')
 Route.group(() => {
     Route.get('', 'BonoController.index');
     Route.get('print/:id', 'BonoController.get_info_by_pdf');
+    Route.get('search/:content', 'BonoController.search_bono');
     Route.post('add', 'BonoController.validate_bono');
 }).prefix('/bono/');
 

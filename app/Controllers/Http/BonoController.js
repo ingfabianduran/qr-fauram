@@ -58,20 +58,28 @@ class BonoController {
             const qr = await qr_code.toDataURL(contenido);
             return qr;
         } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async search_bono({request, response}) {
+        const content_bono = request.params.content || '';
+        try {
+            const bono = await Bono.query().where('contenido', content_bono).fetch();
+            const bono_json = bono.toJSON();
+            // If exist's? 
+            if (bono_json.length > 0) {
+                response.send({ status: true, message: 'Bono encontrado con exito', bono: bono_json });
+            } else {
+                response.send({ status: true, message: 'Bono no encontrado' });
+            }
+        } catch (error) {
             response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
         }
     }
 
-    async get_info_by_pdf({request, response}) {
-        const data_bono = request.params.id; 
-        try {
-            const bono = await Bono.query().with('clientes').where({ 'id': data_bono }).fetch();
-            const json_bono = bono.toJSON();
-            const qr = await this.create_qr(json_bono[0].contenido);
-            response.send({ status: true, message: 'PDF generado correctamente', data: { bono: json_bono, qr: qr } });
-        } catch (error) {
-            response.send({ status: false, message: `Error: ${error.code}` }); 
-        }
+    async update_valor_bono({request, response}) {
+
     }
 }
 

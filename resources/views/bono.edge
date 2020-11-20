@@ -142,13 +142,13 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5 align-self-center">
-                            <form id="form_recargar_bono">
-                                <div class="form-group row">
-                                    <label class="col-sm-7 font-weight-bold">Id bono:</label>
-                                    <div class="col-sm-5 text-right">
-                                        <span>160</span>
-                                    </div>
+                            <div class="form-group row">
+                                <label class="col-sm-7 font-weight-bold">Id bono:</label>
+                                <div class="col-sm-5 text-right">
+                                    <span id="span_bono_id">No consultado</span>
                                 </div>
+                            </div>
+                            <form id="form_recargar_bono">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -159,6 +159,8 @@
                                         <input id="valor_recarga" name="valor_recarga" type="text" class="form-control" placeholder="Valor de la recarga">
                                     </div>
                                 </div>
+                                <input type="hidden" id="id_bono" name="id_bono" value="">
+                                <input type="hidden" id="tipo_bono" name="tipo_bono" value="">
                                 <button type="submit" class="btn btn-block btn-success">Actualizar</button>
                                 <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cancelar</button>
                             </form>

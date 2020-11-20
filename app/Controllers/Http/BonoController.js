@@ -87,7 +87,7 @@ class BonoController {
                 const old_bono = await Bono.query().where('id', data_bono.id_bono).fetch();
                 const json_bono_old = old_bono.toJSON();
                 // New saldo: 
-                const new_saldo_bono = parseInt(json_bono_old[0].saldo) + data_bono.valor_recarga;
+                const new_saldo_bono = parseInt(json_bono_old[0].saldo) + parseInt(data_bono.valor_recarga);
                 const new_bono = await Bono.query().where('id', data_bono.id_bono).update({'saldo': new_saldo_bono});
                 response.send({ status: true, message: 'Bono cargado correctamente' });
             } catch (error) {

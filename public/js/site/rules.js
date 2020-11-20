@@ -47,6 +47,14 @@ function get_rules() {
             }
         },
         bono_recargar: {
+            id_bono: {
+                required: true,
+                digits: true
+            },
+            tipo_bono: {
+                required: true,
+                only_recarga: true
+            },
             valor_recarga: {
                 required: true,
                 digits: true

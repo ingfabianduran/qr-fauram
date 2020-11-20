@@ -11,6 +11,8 @@ $(document).ready(function() {
     get_data_search_cliente();
     // Post form add bono: 
     validate_form_add_bono('form_add_bono', get_rules().bono, '¿Desea registrar el bono?', '/bono/add');
+    // Put form update bono: 
+    validate_form_recargar_bono('form_recargar_bono', get_rules().bono_recargar, '¿Desea recargar el bono?', '/bono/recargar');
 });
 // Event lost focus in input identificacion: 
 function get_data_search_cliente() {
@@ -36,7 +38,7 @@ function validate_form_cliente(id_form, rules, message_confirm, url) {
             show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Registrar', function(confirm) {
                 if (confirm) {
                     const data = serializarForm(id_form);
-                    const response = post(url, data);
+                    const response = post(url, 'POST', data);
                     response.then((res) => {
                         set_data_cliente(res.cliente);
                         events_register_cliente(res.message);
@@ -57,7 +59,7 @@ function validate_form_add_bono(id_form, rules, message_confirm, url) {
                 if (confirm) {
                     load_preloader_container(id_form, 30);
                     const data = serializarForm(id_form);
-                    const response = post(url, data);
+                    const response = post(url, 'POST', data);
                     response.then((res) => {
                         stop_preloader(id_form, 1000);
                         toastr.success(res.message);
@@ -87,6 +89,31 @@ function print_bono(bono) {
                 });
             }
         }); 
+    });
+}
+// validate form recargar bono:
+function validate_form_recargar_bono(id_form, rules, message_confirm, url) {
+    $(`#${id_form}`).validate({
+        rules: rules,
+        ignore: '',
+        submitHandler: function() {
+            show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Recargar', function(confirm) {
+                if (confirm) {
+                    const data = serializarForm(id_form);
+                    const response = post(url, 'PUT', data);
+                    load_preloader_container(id_form);
+                    response.then((res) => {
+                        stop_preloader(id_form, 1000);
+                        toastr.success(res.message);
+                        reset_form_by_http(id_form);
+                        document.getElementById('span_bono_id').textContent = 'No consultado';
+                    }).catch((err) => {
+                        stop_preloader(id_form, 1000);
+                        toastr.error(err.message);
+                    });
+                }
+            });
+        }
     });
 }
 // Set info card cliente:

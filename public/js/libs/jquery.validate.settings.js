@@ -16,6 +16,8 @@ jQuery.validator.setDefaults({
             element.parent('.input-group').append(error);
         } else if (element.hasClass('select2')) {     
             $(element).next().append(error);
+        } else if (element.prop('type') === 'hidden') {
+            toastr.error(`Falta llenar el campo ${ element.attr('id') }`);
         }
     },
 });
@@ -39,3 +41,7 @@ jQuery.extend(jQuery.validator.messages, {
     max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
     min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
 });
+
+$.validator.addMethod("only_recarga", function (value, element) {
+    return value === 'Recarga';
+}, 'Only type bono recarga' );

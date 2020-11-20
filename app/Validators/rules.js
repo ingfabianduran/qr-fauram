@@ -15,6 +15,7 @@ const rules = {
     },
     rules_bono_update: {
         id_bono: 'required|integer',
+        tipo_bono: 'required|in:Recarga',
         valor_recarga: 'required|integer'
     }
 };

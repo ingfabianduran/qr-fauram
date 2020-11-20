@@ -1,7 +1,7 @@
 // Http post: 
-async function post(url, body) {
+async function post(url, type, body) {
     const response = await fetch(url, {
-        method: 'POST', 
+        method: type, 
         headers: {
             'Content-Type': 'application/json'
         },

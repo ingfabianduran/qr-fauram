@@ -1,5 +1,3 @@
-const messages = require("../../../app/Validators/messages");
-
 // PDF para recarga: 
 function content_pdf_recarga(data) {
     const pdf_content = {

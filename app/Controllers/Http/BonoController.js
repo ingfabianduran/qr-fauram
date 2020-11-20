@@ -78,6 +78,19 @@ class BonoController {
         }
     }
 
+    async get_info_by_pdf({request, response}) {
+        const data_bono = request.params.id; 
+        try {
+            const bono = await Bono.query().with('clientes').where({ 'id': data_bono }).fetch();
+            const json_bono = bono.toJSON();
+            const qr = await this.create_qr(json_bono[0].contenido);
+            response.send({ status: true, data: { bono: json_bono, qr: qr } });
+        } catch (error) {
+
+            response.send({ status: false, message: `Error: ${error.code}` }); 
+        }
+    }
+
     async update_valor_bono({request, response}) {
         const data_bono = request.post();
         const is_valid = await validate(data_bono, rules_bono_update, messages);

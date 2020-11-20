@@ -2,7 +2,7 @@
 const Bono = use('App/Models/Bono');
 
 const { validate } = use('Validator');
-const { rules_bono } = require('../../Validators/rules');
+const { rules_bono, rules_bono_update } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 const moment = require('moment');
@@ -79,7 +79,23 @@ class BonoController {
     }
 
     async update_valor_bono({request, response}) {
+        const data_bono = request.post();
+        const is_valid = await validate(data_bono, rules_bono_update, messages);
 
+        if (!is_valid.fails()) {
+            try {
+                const old_bono = await Bono.query().where('id', data_bono.id_bono).fetch();
+                const json_bono_old = old_bono.toJSON();
+                // New saldo: 
+                const new_saldo_bono = parseInt(json_bono_old[0].saldo) + data_bono.valor_recarga;
+                const new_bono = await Bono.query().where('id', data_bono.id_bono).update({'saldo': new_saldo_bono});
+                response.send({ status: true, message: 'Bono cargado correctamente' });
+            } catch (error) {
+                response.send({ status: false, message: `Error: ${error}` });
+            }
+        } else {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });   
+        }
     }
 }
 

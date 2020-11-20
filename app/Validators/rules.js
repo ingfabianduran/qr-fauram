@@ -12,6 +12,10 @@ const rules = {
         saldo: 'required|integer',
         quien_redime: 'required_when:tipo,Regalo',
         correo: 'email|max:45'
+    },
+    rules_bono_update: {
+        id_bono: 'required|integer',
+        valor_recarga: 'required|integer'
     }
 };
 

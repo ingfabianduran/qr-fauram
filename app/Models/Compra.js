@@ -7,6 +7,10 @@ class Compra extends Model {
     clientes() {
         return this.belongsTo('App/Models/Cliente');
     }
+
+    bonos() {
+        return this.belongsTo('App/Models/Bono');
+    }
 }
 
 module.exports = Compra

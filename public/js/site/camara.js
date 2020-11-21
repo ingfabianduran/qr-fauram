@@ -35,6 +35,8 @@ function read_qr_recarga(id_select, id_video, cameras) {
                 document.getElementById('span_bono_id').textContent = res.bono[0].id;
                 document.getElementById('id_bono').value = res.bono[0].id;
                 document.getElementById('tipo_bono').value = res.bono[0].tipo;
+            }).catch((err) => {
+                toastr.error(err.message);
             });
         }
     });
@@ -53,7 +55,19 @@ function read_qr_redimir(id_select, id_video, cameras) {
     const scanner = new Instascan.Scanner({ video: document.getElementById(id_video) });
     scanner.addListener('scan', function (content) {
         if (content != '' || content != undefined || content != null) {
-    
+            const url = `/bono/search/redimir/${content}`;
+            const bono = get(url);
+            bono.then((res) => {
+                load_preloader_container('modal_add_redimir', 20);
+                $('#modal_add_redimir').modal('show');
+                document.getElementById('quien_lo_compro').value = `${res.bono[0].clientes.nombre} ${res.bono[0].clientes.apellido}`;
+                document.getElementById('valor_bono').value = res.bono[0].saldo;
+                document.getElementById('fecha_compra').value = res.bono[0].created_at;
+                document.getElementById('image_qr_consultado').src = res.qr;
+                stop_preloader('modal_add_redimir', 2000);
+            }).catch((err) => {
+                toastr.error(err.message);
+            });
         }
     });
 

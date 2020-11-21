@@ -84,9 +84,8 @@ class BonoController {
             const bono = await Bono.query().with('clientes').where({ 'id': data_bono }).fetch();
             const json_bono = bono.toJSON();
             const qr = await this.create_qr(json_bono[0].contenido);
-            response.send({ status: true, data: { bono: json_bono, qr: qr } });
+            response.send({ status: true, message: 'PDF generado correctamente', data: { bono: json_bono, qr: qr } });
         } catch (error) {
-
             response.send({ status: false, message: `Error: ${error.code}` }); 
         }
     }
@@ -108,6 +107,18 @@ class BonoController {
             }
         } else {
             response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });   
+        }
+    }
+
+    async search_bono_by_redimir({request, response}) {
+        const content_bono = request.params.content || '';
+        try {
+            const bono = await Bono.query().with('clientes').where({ 'contenido': content_bono }).fetch();
+            const json_bono = bono.toJSON();
+            const qr = await this.create_qr(json_bono[0].contenido);
+            response.send({ status: true, bono: json_bono, qr: qr });
+        } catch (error) {
+            response.send({ status: false, message: `Error: ${error.code}` });
         }
     }
 }

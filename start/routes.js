@@ -22,6 +22,7 @@ Route.group(() => {
     Route.get('', 'BonoController.index');
     Route.get('print/:id', 'BonoController.get_info_by_pdf');
     Route.get('search/:content', 'BonoController.search_bono');
+    Route.get('search/redimir/:content', 'BonoController.search_bono_by_redimir');
     Route.post('add', 'BonoController.validate_bono');
     Route.put('recargar', 'BonoController.update_valor_bono');
 }).prefix('/bono/');

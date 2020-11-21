@@ -32,12 +32,8 @@ function get_rules() {
             quien_redime: {
                 required: {
                     depends: function(element) {
-                        if ($('#tipo').val() === 'Regalo') {
-                            return true;
-                        }
-                        else {
-                            return false;
-                        }
+                        if ($('#tipo').val() === 'Regalo') return true;
+                        else return false;
                     }
                 },
                 rangelength: [3, 60]

@@ -46,51 +46,36 @@
                 </div>
                 <hr />
                 <form id="form_add_redimir">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="identificacion_redimir" name="identificacion_redimir" placeholder="N° de identificación">
-                                </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="identificacion" name="identificacion" placeholder="N° de identificación">
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="nombre_redimir" name="nombre_redimir" placeholder="Nombre de quien redime">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="contacto" name="contacto" placeholder="Contacto de quien redime">
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" id="contacto_redimir" name="contacto_redimir" placeholder="Contacto de quien redime">
+                        <div class="col">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" id="correo_redimir" name="correo_redimir" placeholder="Correo de quien redime">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
-                                        </div>
-                                        <input type="text" class="form-control" id="valor_redimir" name="valor_redimir" placeholder="Valor a pagar">
-                                    </div>
+                                    <input type="text" class="form-control" id="valor" name="valor" placeholder="Valor a pagar">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" id="bono_id" name="bono_id" value="">
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-success">Efectuar Pago</button>

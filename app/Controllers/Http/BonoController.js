@@ -90,7 +90,7 @@ class BonoController {
         }
     }
 
-    async update_valor_bono({request, response}) {
+    async recargar_bono({request, response}) {
         const data_bono = request.post();
         const is_valid = await validate(data_bono, rules_bono_update, messages);
 
@@ -120,6 +120,10 @@ class BonoController {
         } catch (error) {
             response.send({ status: false, message: `Error: ${error.code}` });
         }
+    }
+
+    async update_valor_redimir(request) {
+        
     }
 }
 

@@ -13,6 +13,8 @@ $(document).ready(function() {
     validate_form_add_bono('form_add_bono', get_rules().bono, '¿Desea registrar el bono?', '/bono/add');
     // Put form update bono: 
     validate_form_recargar_bono('form_recargar_bono', get_rules().bono_recargar, '¿Desea recargar el bono?', '/bono/recargar');
+    // Post form redimir bono: 
+    validate_form_redimir_bono('form_add_redimir', get_rules().bono_redimir, '¿Desea redimir el bono?', '/bono/redimir');
 });
 // Event lost focus in input identificacion: 
 function get_data_search_cliente() {
@@ -111,6 +113,20 @@ function validate_form_recargar_bono(id_form, rules, message_confirm, url) {
                         stop_preloader(id_form, 1000);
                         toastr.error(err.message);
                     });
+                }
+            });
+        }
+    });
+}
+// Validate form redimir bono: 
+function validate_form_redimir_bono(id_form, rules, message_confirm, url) {
+    $(`#${id_form}`).validate({
+        rules: rules,
+        ignore: '',
+        submitHandler: function() {
+            show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Redimir', function(confirm) {
+                if (confirm) {
+                    
                 }
             });
         }

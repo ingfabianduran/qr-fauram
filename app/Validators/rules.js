@@ -17,6 +17,12 @@ const rules = {
         id_bono: 'required|integer',
         tipo_bono: 'required|in:Recarga',
         valor_recarga: 'required|integer'
+    },
+    rules_bono_redimir: {
+        identificacion: 'required|integer',
+        contacto: 'integer',
+        valor: 'required|integer',
+        bono_id: 'required|integer'
     }
 };
 

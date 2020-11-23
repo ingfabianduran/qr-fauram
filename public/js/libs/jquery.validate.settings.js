@@ -17,7 +17,7 @@ jQuery.validator.setDefaults({
         } else if (element.hasClass('select2')) {     
             $(element).next().append(error);
         } else if (element.prop('type') === 'hidden') {
-            toastr.error(`Falta llenar el campo ${ element.attr('id') }`);
+            toastr.error(`${ error[0].innerHTML } ${ element.attr('id') }`);
         }
     },
 });

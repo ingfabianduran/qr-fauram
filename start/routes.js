@@ -24,10 +24,14 @@ Route.group(() => {
     Route.get('search/:content', 'BonoController.search_bono');
     Route.get('search/redimir/:content', 'BonoController.search_bono_by_redimir');
     Route.post('add', 'BonoController.validate_bono');
-    Route.put('recargar', 'BonoController.update_valor_bono');
+    Route.put('recargar', 'BonoController.recargar_bono');
 }).prefix('/bono/');
 
 Route.group(() => {
     Route.get('search/:ident', 'ClienteController.search_cliente');
     Route.post('add', 'ClienteController.add_cliente');
 }).prefix('/cliente/');
+
+Route.group(() => {
+    Route.post('add', 'RedimidoController.redimir_bono');
+}).prefix('/redimir/');

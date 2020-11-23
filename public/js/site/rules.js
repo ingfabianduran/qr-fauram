@@ -55,6 +55,23 @@ function get_rules() {
                 required: true,
                 digits: true
             }
+        },
+        bono_redimir: {
+            identificacion: {
+                required: true,
+                digits: true,
+            },
+            contacto: {
+                digits: true
+            },
+            valor: {
+                required: true,
+                digits: true
+            },
+            bono_id: {
+                required: true,
+                digits: true
+            }
         }
     };
     return rules;

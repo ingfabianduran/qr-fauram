@@ -121,10 +121,6 @@ class BonoController {
             response.send({ status: false, message: `Error: ${error.code}` });
         }
     }
-
-    async update_valor_redimir(request) {
-        
-    }
 }
 
 module.exports = BonoController

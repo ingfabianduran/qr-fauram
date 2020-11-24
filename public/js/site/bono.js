@@ -18,7 +18,7 @@ $(document).ready(function() {
 });
 // Event lost focus in input identificacion: 
 function get_data_search_cliente() {
-    const input_identificacion = document.getElementById('identificacion');
+    const input_identificacion = document.getElementById('form_add_cliente')[0]; 
     input_identificacion.addEventListener('focusout', () => {
         const url = `/cliente/search/${input_identificacion.value}`;
         const cliente = get(url);

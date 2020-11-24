@@ -1,12 +1,11 @@
 'use strict'
 
 const Redimir = use('App/Models/Redimido');
+const Bono = use('App/Models/Bono');
 
 const { validate } = use('Validator');
 const { rules_bono_redimir } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
-
-const BonoController = require('./BonoController');
 
 class RedimidoController {
     async redimir_bono({request, response}) {
@@ -14,9 +13,18 @@ class RedimidoController {
         const is_valid = await validate(data_redimido, rules_bono_redimir, messages); 
         if (!is_valid.fails()) {
             try {
-                const redimir = await Redimir.create(data_redimido);
-                const bono = new BonoController();
-                response.send({ status: true, message: 'Bono redimido correctamente' });
+                // Valid if bono have saldo: 
+                let bono = await Bono.query().where('id', data_redimido.bono_id).fetch();
+                const json_bono = bono.toJSON();
+                if (parseInt(json_bono[0].saldo) > parseInt(data_redimido.valor)) {
+                    const new_saldo_bono = parseInt(json_bono[0].saldo) - parseInt(data_redimido.valor);
+                    bono = await Bono.query().where('id', data_redimido.bono_id).update({'saldo': new_saldo_bono});
+                    // New redimir: 
+                    const redimir = await Redimir.create(data_redimido);
+                    response.send({ status: true, message: 'Bono redimido correctamente' });
+                } else {
+                    response.send({ status: false, message: 'El saldo actual del bono el insuficiente' });
+                }
             } catch (error) {
                 response.send({ status: false, message: `Error: ${error.code}` });
             }

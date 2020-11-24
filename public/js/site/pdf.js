@@ -101,8 +101,8 @@ function download_pdf(tipo, data, message) {
             }
         };
         
-        if (tipo === 'Regalo') pdfMake.createPdf(content_pdf_regalo(data)).download();
-        else if (tipo === 'Recarga') pdfMake.createPdf(content_pdf_recarga(data)).download();
+        if (tipo === 'Regalo') pdfMake.createPdf(content_pdf_regalo(data)).open();
+        else if (tipo === 'Recarga') pdfMake.createPdf(content_pdf_recarga(data)).open();
         else toastr.error('Faltan datos por generar');
         toastr.success(message);
     } catch (error) {

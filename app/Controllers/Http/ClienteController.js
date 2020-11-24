@@ -10,7 +10,13 @@ class ClienteController {
         const identificacion = request.params.ident || 0;
         try {
             const cliente = await Cliente.query().where('identificacion', identificacion).fetch();
-            response.send({ status: true, message: 'Cliente encontrado y registrado', cliente: cliente });  
+            const json_cliente = cliente.toJSON();
+            // If exist: 
+            if (json_cliente.length > 0) {
+                response.send({ status: true, message: 'Cliente encontrado y registrado', cliente: json_cliente }); 
+            } else {
+                response.send({ status: false, message: 'Cliente no encontrado' }); 
+            }
         } catch (error) {
             response.send({ status: true, message: `Error: ${error.code}`, cliente: cliente });
         }

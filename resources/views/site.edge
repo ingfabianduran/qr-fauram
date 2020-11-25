@@ -14,6 +14,8 @@
         {{script('/js/libs/toastr.min.js')}}
         {{script('/js/libs/pdfmake.min.js')}}
         {{script('/js/libs/vfs_fonts.min.js')}}
+        {{script('/js/libs/datatables.min.js')}}
+        {{script('/js/libs/dataTables.bootstrap4.min.js')}}
         {{--Site JS--}}
         {{script('/js/site/camara.js')}}
         {{script('/js/site/loaders.js')}}
@@ -45,12 +47,45 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li class="nav-header">Dashboard</li>
-                            <li class="nav-item">
+                            <li class="nav-item has-treeview menu-open">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-pager"></i>
                                     <p>
                                         Bonos
+                                        <i class="right fas fa-angle-left"></i>
                                     </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                      <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Gestionar Bonos</p>
+                                      </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                          <i class="far fa-circle nav-icon"></i>
+                                          <p>Ver Bonos</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-hand-holding-usd"></i>
+                                    <p>Compras</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/cliente/" class="nav-link">
+                                    <i class="nav-icon fas fa-user-friends"></i>
+                                    <p>Clientes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-money-check-alt"></i>
+                                    <p>Redimidos</p>
                                 </a>
                             </li>
                         </ul>

@@ -6,6 +6,10 @@ const { rules_cliente } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 class ClienteController {
+    index({view}) {
+        return view.render('clientes.edge');
+    }
+
     async search_cliente({request, response}) {
         const identificacion = request.params.ident || 0;
         try {
@@ -35,6 +39,16 @@ class ClienteController {
             }
         } else {
             response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
+        }
+    }
+
+    async view_clientes({response}) {
+        try {
+            const clientes = await Cliente.query().fetch();
+            const json_clientes = clientes.toJSON();
+            response.send(json_clientes);  
+        } catch (error) {
+            response.send({ status: false, message: `Error: ${error.code}` });
         }
     }
 }

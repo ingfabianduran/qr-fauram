@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    data_table_cliente();
+});
+
+function data_table_cliente() {
     const columns = [
         { data: 'identificacion' },
         { data: 'nombre' },
@@ -15,6 +19,5 @@ $(document).ready(function() {
               } 
         },
     ];
-
     create_data_tables('tab_clientes', columns, '/cliente/list');
-});
+}

@@ -1,5 +1,6 @@
 // Get cameras and validate if exist in this device:
 function get_cameras() {
+    load_preloader_container('content_main', 50);
     Instascan.Camera.getCameras().then(camaras => {
         cameras_into_select('camaras_recargar', camaras);   
         cameras_into_select('camaras_redimir', camaras);
@@ -9,6 +10,7 @@ function get_cameras() {
         disabled_select_camaras('camaras_recargar');
         disabled_select_camaras('camaras_redimir');
     });
+    stop_preloader('content_main', 2000);
 }
 // Render cameras in option's select: 
 function cameras_into_select(id_select, camaras) {

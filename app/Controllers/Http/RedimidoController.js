@@ -11,8 +11,10 @@ class RedimidoController {
     index({view}) {
         const data_table = {
             titulo: 'Listado de redimidos',
-            
-        }; 
+            id: 'tab_redimidos',
+            columnas: ['Documento', 'Valor', 'Fecha', 'Bono']
+        };
+        return view.render('redimidos', {data_table}); 
     }
 
     async redimir_bono({request, response}) {

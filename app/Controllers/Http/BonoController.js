@@ -24,7 +24,7 @@ class BonoController {
             { value: 'Recarga', text: 'Recarga' },
             { value: 'Regalo', text: 'Regalo' }
         ];
-        return view.render('gestion', {tipo_bono});
+        return view.render('gestion_bonos', {tipo_bono});
     }
 
     async validate_bono({request, response}) {
@@ -39,7 +39,6 @@ class BonoController {
                     tipo: bono.tipo,
                     valor: bono.saldo,
                     cliente_id: bono.cliente_id,
-                    bono_id: bono.id
                 };
                 const compra = await Compra.create(data_compra);
                 response.send({ status: true, message: 'Bono registrado correctamente', data: { bono: bono, qr: qr } });

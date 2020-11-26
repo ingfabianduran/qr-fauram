@@ -1,6 +1,6 @@
 @layout('site')
 @section('content')
-    @!component('data_table', data_table = data_table)
+    @!component('components.data_table', data_table = data_table)
     {{--Js by this view--}}
     {{script('/js/site/cliente.js')}}
 @endsection

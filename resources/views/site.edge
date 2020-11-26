@@ -17,14 +17,14 @@
         {{script('/js/libs/datatables.min.js')}}
         {{script('/js/libs/dataTables.bootstrap4.min.js')}}        
         {{--Site JS--}}
-        {{script('/js/site/camara.js')}}
-        {{script('/js/site/loaders.js')}}
-        {{script('/js/site/alerts.js')}}
-        {{script('/js/site/http.js')}}
-        {{script('/js/site/rules.js')}}
-        {{script('/js/site/forms.js')}}
-        {{script('/js/site/pdf.js')}}
-        {{script('/js/site/data_tables.js')}}
+        {{script('/js/site/libs/camara.js')}}
+        {{script('/js/site/libs/loaders.js')}}
+        {{script('/js/site/libs/alerts.js')}}
+        {{script('/js/site/libs/http.js')}}
+        {{script('/js/site/libs/rules.js')}}
+        {{script('/js/site/libs/forms.js')}}
+        {{script('/js/site/libs/pdf.js')}}
+        {{script('/js/site/libs/data_tables.js')}}
         <div id="page-top" class="wrapper">  
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <ul class="navbar-nav">
@@ -48,7 +48,7 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li class="nav-header">Dashboard</li>
-                            <li class="nav-item has-treeview menu-open">
+                            <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-pager"></i>
                                     <p>
@@ -58,7 +58,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                      <a href="/bono/" class="nav-link">
+                                      <a href="/bono/gestion" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Gestionar Bonos</p>
                                       </a>
@@ -93,7 +93,7 @@
                     </nav>
                 </div>
             </aside>
-            <div class="content-wrapper">
+            <div id="content_main" class="content-wrapper">
                 <section class="content">
                     <div class="container-fluid">
                         <div class="row">

@@ -8,12 +8,8 @@ class Bono extends Model {
         return this.belongsTo('App/Models/Cliente');
     }
 
-    compras() {
-        return this.hasMany('App/Models/Compra');
-    }
-
     redimidos() {
-        return this.hasMany('App/Models/Cliente');
+        return this.hasMany('App/Models/Redimido');
     }
 
     // Format Dates: 

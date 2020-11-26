@@ -9,7 +9,7 @@ class Compra extends Model {
     }
 
     bonos() {
-        return this.belongsTo('App/Models/Bono');
+        return this.hasOne('App/Models/Bono');
     }
 }
 

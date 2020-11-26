@@ -11,12 +11,20 @@ const faker = require('faker');
 
 class BonoController {
     index({view}) {
+        const data_table = {
+            titulo: 'Listado de Bonos',
+            id: 'tab_bonos',
+            columnas: ['ID', 'Tipo', 'Quien redime', 'Saldo', 'Cliente', 'Fecha de compra']
+        };
+        return view.render('bonos', {data_table}); 
+    }
+
+    gestion({view}) {
         const tipo_bono = [
             { value: 'Recarga', text: 'Recarga' },
             { value: 'Regalo', text: 'Regalo' }
         ];
-
-        return view.render('bono', {tipo_bono});
+        return view.render('gestion', {tipo_bono});
     }
 
     async validate_bono({request, response}) {
@@ -138,6 +146,16 @@ class BonoController {
             } else {
                 response.send({ status: false, message: 'Bono no encontrado'});
             }
+        } catch (error) {
+            response.send({ status: false, message: `Error: ${error.code}` });
+        }
+    }
+
+    async list_bonos({response}) {
+        try {
+            const bonos = await Bono.query().with('clientes').fetch();
+            const json_bonos = bonos.toJSON();
+            response.send({ data: json_bonos });
         } catch (error) {
             response.send({ status: false, message: `Error: ${error.code}` });
         }

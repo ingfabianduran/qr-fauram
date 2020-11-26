@@ -8,6 +8,13 @@ const { rules_bono_redimir } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 class RedimidoController {
+    index({view}) {
+        const data_table = {
+            titulo: 'Listado de redimidos',
+            
+        }; 
+    }
+
     async redimir_bono({request, response}) {
         const data_redimido = request.post(); 
         const is_valid = await validate(data_redimido, rules_bono_redimir, messages); 

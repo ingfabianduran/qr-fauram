@@ -10,7 +10,7 @@ class ClienteController {
         const data_table = {
             titulo: 'Listado de Clientes',
             id: 'tab_clientes',
-            columnas: ['Identificación', 'Nombre', 'Apellidos', 'Contacto']
+            columnas: ['Identificación', 'Nombre', 'Apellidos', 'Contacto', 'Gestión']
         };
         return view.render('clientes.edge', {data_table});
     }
@@ -47,7 +47,7 @@ class ClienteController {
         }
     }
 
-    async list_clientes({request, response}) {
+    async list_clientes({response}) {
         try {
             const clientes = await Cliente.query().fetch();
             const json_clientes = clientes.toJSON();

@@ -39,7 +39,6 @@ const DATA_COMPRA = {
             tipo: bono.tipo, 
             valor: bono.saldo,
             cliente_id: cliente.id,
-            bono_id: bono.id
         };
 
         return compra; 

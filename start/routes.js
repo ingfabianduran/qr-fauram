@@ -20,6 +20,7 @@ const Route = use('Route')
 
 Route.group(() => {
     Route.get('', 'BonoController.index');
+    Route.get('gestion', 'BonoController.gestion');
     Route.get('print/:id', 'BonoController.get_info_by_pdf');
     Route.get('search/:content', 'BonoController.search_bono');
     Route.get('search/redimir/:content', 'BonoController.search_bono_by_redimir');
@@ -37,3 +38,8 @@ Route.group(() => {
 Route.group(() => {
     Route.post('add', 'RedimidoController.redimir_bono');
 }).prefix('/redimir/');
+
+Route.group(() => {
+    Route.get('', 'CompraController.index'); 
+    Route.get('list', 'CompraController.list_compras'); 
+}).prefix('/compra/');

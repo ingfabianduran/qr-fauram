@@ -7,7 +7,12 @@ const { messages } = require('../../Validators/messages');
 
 class ClienteController {
     index({view}) {
-        return view.render('clientes.edge');
+        const data_table = {
+            titulo: 'Listado de Clientes',
+            id: 'tab_clientes',
+            columnas: ['Identificación', 'Nombre', 'Apellidos', 'Contacto']
+        };
+        return view.render('clientes.edge', {data_table});
     }
 
     async search_cliente({request, response}) {
@@ -42,11 +47,11 @@ class ClienteController {
         }
     }
 
-    async view_clientes({response}) {
+    async list_clientes({request, response}) {
         try {
             const clientes = await Cliente.query().fetch();
             const json_clientes = clientes.toJSON();
-            response.send(json_clientes);  
+            response.send({ data: json_clientes });  
         } catch (error) {
             response.send({ status: false, message: `Error: ${error.code}` });
         }

@@ -29,7 +29,7 @@ Route.group(() => {
 
 Route.group(() => {
     Route.get('', 'ClienteController.index');
-    Route.get('list', 'ClienteController.view_clientes');
+    Route.get('list', 'ClienteController.list_clientes');
     Route.get('search/:ident', 'ClienteController.search_cliente');
     Route.post('add', 'ClienteController.add_cliente');
 }).prefix('/cliente/');

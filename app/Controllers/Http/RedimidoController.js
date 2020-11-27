@@ -12,7 +12,7 @@ class RedimidoController {
         const data_table = {
             titulo: 'Listado de redimidos',
             id: 'tab_redimidos',
-            columnas: ['Documento', 'Valor', 'Fecha', 'Bono']
+            columnas: ['Documento', 'Valor', 'Fecha', 'Bono', 'Gestión']
         };
         return view.render('redimidos', {data_table}); 
     }
@@ -39,6 +39,16 @@ class RedimidoController {
             }
         } else {
             response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
+        }
+    }
+
+    async list_redimidos({response}) {
+        try {
+            const redimidos = await Redimir.query().with('bonos').fetch();
+            const json_redimidos = redimidos.toJSON();
+            response.send({ data: json_redimidos });
+        } catch (error) {
+            response.send({ status: false, message: `Error: ${error.code}` });
         }
     }
 }

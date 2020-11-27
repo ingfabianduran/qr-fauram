@@ -1,7 +1,7 @@
 $(document).ready(function() {
     data_table_cliente();
 });
-
+// Create table by cliente: 
 function data_table_cliente() {
     const columns = [
         { data: 'identificacion' },
@@ -10,12 +10,8 @@ function data_table_cliente() {
         { data: 'contacto' },
         { 
             data: null, 
-            title: 'Action', 
             render: (item) => { 
-                return `<div class="text-center">
-                            <button type="button" class="btn btn-info"><i class="fa fa-pen"></i>  Update</button>
-                            <button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i>  Delete</button>
-                        </div>`;
+                return create_buttons_gestion(item);
               } 
         },
     ];

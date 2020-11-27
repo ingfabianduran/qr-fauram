@@ -24,6 +24,7 @@ Route.group(() => {
     Route.get('print/:id', 'BonoController.get_info_by_pdf');
     Route.get('search/:content', 'BonoController.search_bono');
     Route.get('search/redimir/:content', 'BonoController.search_bono_by_redimir');
+    Route.get('list', 'BonoController.list_bonos');
     Route.post('add', 'BonoController.validate_bono');
     Route.put('recargar', 'BonoController.recargar_bono');
 }).prefix('/bono/');
@@ -36,6 +37,8 @@ Route.group(() => {
 }).prefix('/cliente/');
 
 Route.group(() => {
+    Route.get('', 'RedimidoController.index');
+    Route.get('list', 'RedimidoController.list_redimidos');
     Route.post('add', 'RedimidoController.redimir_bono');
 }).prefix('/redimir/');
 

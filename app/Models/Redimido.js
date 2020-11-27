@@ -5,7 +5,12 @@ const Model = use('Model')
 
 class Redimido extends Model {
     bonos() {
-        return this.hasOne('App/Models/Bono');
+        return this.belongsTo('App/Models/Bono');
+    }
+
+    // Format Dates: 
+    static castDates(field, value) {
+        return value ? value.format("YYYY-MM-DD") : value;
     }
 }
 

@@ -8,8 +8,9 @@ class Compra extends Model {
         return this.belongsTo('App/Models/Cliente');
     }
 
-    bonos() {
-        return this.hasOne('App/Models/Bono');
+    // Format Dates: 
+    static castDates(field, value) {
+        return value ? value.format("YYYY-MM-DD") : value;
     }
 }
 

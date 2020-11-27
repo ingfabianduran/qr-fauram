@@ -1,15 +1,15 @@
 'use strict'
 
-const Compra = use('App/Models/Bono'); 
+const Compra = use('App/Models/Compra'); 
 
 class CompraController {
     index({view}) {
         const data_table = {
             titulo: 'Listado de compras',
-            id: 'tab_clientes',
-            columnas: ['Tipo de compra', 'Valor', 'Cliente', 'Fecha']
+            id: 'tab_compras',
+            columnas: ['Tipo de compra', 'Valor', 'Cliente', 'Fecha', 'Gestión']
         }
-        return view.render('bonos', {data_table});
+        return view.render('compras', {data_table});
     }
 
     async list_compras({response}) {

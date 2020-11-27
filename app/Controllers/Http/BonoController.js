@@ -14,7 +14,7 @@ class BonoController {
         const data_table = {
             titulo: 'Listado de Bonos',
             id: 'tab_bonos',
-            columnas: ['ID', 'Tipo', 'Quien redime', 'Saldo', 'Cliente', 'Fecha de compra']
+            columnas: ['ID', 'Tipo', 'Quien redime', 'Saldo', 'Cliente', 'Fecha de compra', 'Gestión']
         };
         return view.render('bonos', {data_table}); 
     }
@@ -122,7 +122,6 @@ class BonoController {
                     tipo: 'Recarga valor',
                     valor: data_bono.valor_recarga,
                     cliente_id: json_bono_old[0].cliente_id,
-                    bono_id: json_bono_old[0].id
                 };
                 const compra = await Compra.create(data_compra);
                 response.send({ status: true, message: 'Bono cargado correctamente' });

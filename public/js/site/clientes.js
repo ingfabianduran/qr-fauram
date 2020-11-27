@@ -1,5 +1,6 @@
 $(document).ready(function() {
     data_table_cliente();
+    view_delete_confirm('tab_clientes');
 });
 // Create table by cliente: 
 function data_table_cliente() {

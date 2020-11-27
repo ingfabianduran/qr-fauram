@@ -15,3 +15,9 @@ function create_buttons_gestion(item) {
                             </div>`;
     return render_button;
 }
+
+function view_delete_confirm(id_table) {
+    $(`#${id_table}`).on('click', '.btn-danger', () => {
+        
+    });
+}

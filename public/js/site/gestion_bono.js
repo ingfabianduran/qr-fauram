@@ -23,7 +23,7 @@ function get_data_search_cliente() {
     const input_identificacion = document.getElementById('form_add_cliente')[0]; 
     input_identificacion.addEventListener('focusout', () => {
         const url = `/cliente/search/${input_identificacion.value}`;
-        const cliente = get(url);
+        const cliente = get(url, 'GET');
         cliente.then((data) => {
             if (data.cliente) {
                 set_data_cliente(data.cliente[0]);
@@ -98,7 +98,7 @@ function print_bono(bono) {
         show_alert_confirm('Esta seguro???', '¿Desea imprimir el bono?', 'question', 'Generar PDF', function(confirm) {
             if (confirm) {
                 const url = `/bono/print/${bono.id}`;
-                const info_bono = get(url); 
+                const info_bono = get(url, 'GET'); 
                 info_bono.then((res) => {
                     if (res.status) {
                         download_pdf(res.data.bono[0].tipo, res.data, res.message);

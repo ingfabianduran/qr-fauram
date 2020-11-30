@@ -19,6 +19,7 @@ function data_table_compra() {
         },
         { data: 'created_at' },
         { 
+            data: null, 
             render: (item) => { 
                 return create_buttons_gestion(item);
             } 

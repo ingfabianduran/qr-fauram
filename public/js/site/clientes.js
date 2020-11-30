@@ -1,6 +1,6 @@
 $(document).ready(function() {
     data_table_cliente();
-    view_delete_confirm('tab_clientes');
+    view_delete_confirm('tab_clientes', 'Desea eliminar un Cliente', '/cliente/delete/');
 });
 // Create table by cliente: 
 function data_table_cliente() {

@@ -27,7 +27,7 @@ class ClienteController {
                 response.send({ status: false, message: 'Cliente no encontrado' }); 
             }
         } catch (error) {
-            response.send({ status: true, message: `Error: ${error.code}`, cliente: cliente });
+            response.send({ status: false, message: `Error: ${error.code}` });
         }
     }
 
@@ -52,6 +52,24 @@ class ClienteController {
             const clientes = await Cliente.query().fetch();
             const json_clientes = clientes.toJSON();
             response.send({ data: json_clientes });  
+        } catch (error) {
+            response.send({ status: false, message: `Error: ${error.code}` });
+        }
+    }
+
+    async search_cliente_by_id({request, response}) {
+        const id = request.params.id || 0;
+        try {
+            const cliente = await Cliente.query().where('id', id).fetch();
+            const json_cliente = cliente.toJSON();
+            // If exist: 
+            if (json_cliente.length > 0) {
+                const template = require('../../Template/modal');
+                const html = template.create_modal_update('form_update_cliente', 'Modificar Cliente', json_cliente[0]);
+                response.send({ status: true, html: html });
+            } else {
+                response.send({ status: false, message: 'Cliente no encontrado' });   
+            }
         } catch (error) {
             response.send({ status: false, message: `Error: ${error.code}` });
         }

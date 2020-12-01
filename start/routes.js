@@ -25,6 +25,7 @@ Route.group(() => {
     Route.get('search/:content', 'BonoController.search_bono');
     Route.get('search/redimir/:content', 'BonoController.search_bono_by_redimir');
     Route.get('list', 'BonoController.list_bonos');
+    Route.get('search/update/:id', 'BonoController.search_bono_by_id');
     Route.post('add', 'BonoController.validate_bono');
     Route.put('recargar', 'BonoController.recargar_bono');
 }).prefix('/bono/');
@@ -33,6 +34,7 @@ Route.group(() => {
     Route.get('', 'ClienteController.index');
     Route.get('list', 'ClienteController.list_clientes');
     Route.get('search/:ident', 'ClienteController.search_cliente');
+    Route.get('search/update/:id', 'ClienteController.search_cliente_by_id');
     Route.post('add', 'ClienteController.add_cliente');
 }).prefix('/cliente/');
 

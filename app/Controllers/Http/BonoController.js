@@ -158,6 +158,24 @@ class BonoController {
             response.send({ status: false, message: `Error: ${error.code}` });
         }
     }
+
+    async search_bono_by_id({request, response}) {
+        const id = request.params.id || '';
+        try {
+            const bono = await Bono.query().where('id', id).fetch();
+            const bono_json = bono.toJSON();
+            // If exist's? 
+            if (bono_json.length > 0) {
+                const template = require('../../Template/modal');
+                const html = template.create_modal_update('form_update_bono', 'Modificar Bono', bono_json[0]);
+                response.send({ status: true, html: html });
+            } else {
+                response.send({ status: false, message: 'Bono no encontrado' });
+            }
+        } catch (error) {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
+        }
+    }
 }
 
 module.exports = BonoController

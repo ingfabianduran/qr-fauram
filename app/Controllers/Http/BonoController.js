@@ -20,11 +20,8 @@ class BonoController {
     }
 
     gestion({view}) {
-        const tipo_bono = [
-            { value: 'Recarga', text: 'Recarga' },
-            { value: 'Regalo', text: 'Regalo' }
-        ];
-        return view.render('gestion_bonos', {tipo_bono});
+        const { tipo_bonos } = require('../../data/data');
+        return view.render('gestion_bonos', {tipo_bonos});
     }
 
     async validate_bono({request, response}) {
@@ -167,7 +164,8 @@ class BonoController {
             // If exist's? 
             if (bono_json.length > 0) {
                 const template = require('../../Template/modal');
-                const html = template.create_modal_update('form_update_bono', 'Modificar Bono', bono_json[0]);
+                const { tipo_bonos } = require('../../data/data');
+                const html = template.create_modal_update('form_update_bono', 'Modificar Bono', bono_json[0], tipo_bonos);
                 response.send({ status: true, html: html });
             } else {
                 response.send({ status: false, message: 'Bono no encontrado' });

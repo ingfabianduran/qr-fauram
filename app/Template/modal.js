@@ -1,5 +1,7 @@
+const data = require("../data/data");
+
 const template = {
-    create_modal_update (id_form, title, data) {
+    create_modal_update (id_form, title, data, select) {
         let form = `<div class="modal-header bg-info">
                         <h4 class="modal-title">${title}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -8,7 +10,7 @@ const template = {
                     </div><form id="${id_form}"><div class="modal-body">`;
         for (const property in data) {
             form += `<div class="form-group">
-                        ${this.get_input(data, property)}
+                        ${this.get_input(data, property, select)}
                      </div>`;
         }
         form += `</div>
@@ -28,16 +30,35 @@ const template = {
         return capitalize_label.replace('_', ' '); 
     },
 
-    get_input (data, property) {
+    get_input (data, property, select) {
         if (property != 'created_at' && property != 'updated_at') {
             if (property != 'id') {
-                return `<label for="${property}">${this.spaces(property)}:</label><input type="text" class="form-control" id="${property}" value="${data[property]}">`;
+                if (property === 'tipo' && select) {
+                    return this.input_select(data, property, select);
+                } else {
+                    return `<label for="${property}">${this.spaces(property)}:</label><input type="text" class="form-control" id="${property}" value="${data[property]}">`;
+                }
             } else {
                 return `<input type="hidden" class="form-control" id="${property}" value="${data[property]}">`;
-            }
+            } 
         } else {
             return '';
         }
+    },
+
+    input_select(data, property, select) {
+        let input_select = `<label for="${property}">${this.spaces(property)}:</label>
+                            <select id="${property}" name="${property}" class="form-control custom-select">
+                                <option value="">Seleccioné un tipo</option>`;
+        for (const i in select) {
+            if (select[i].value === data[property]) {
+                input_select += `<option selected value="${select[i].value}">${select[i].value}</option>`;
+            } else {
+                input_select += `<option value="${select[i].value}">${select[i].value}</option>`;
+            }
+        }
+        input_select += `</select>`;
+        return input_select;
     }
 }
 

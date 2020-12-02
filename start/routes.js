@@ -41,10 +41,12 @@ Route.group(() => {
 Route.group(() => {
     Route.get('', 'RedimidoController.index');
     Route.get('list', 'RedimidoController.list_redimidos');
+    Route.get('search/update/:id', 'RedimidoController.search_redimido_by_id');
     Route.post('add', 'RedimidoController.redimir_bono');
 }).prefix('/redimir/');
 
 Route.group(() => {
     Route.get('', 'CompraController.index'); 
-    Route.get('list', 'CompraController.list_compras'); 
+    Route.get('list', 'CompraController.list_compras');
+    Route.get('search/update/:id', 'CompraController.search_compra_by_id');
 }).prefix('/compra/');

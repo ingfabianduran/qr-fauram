@@ -65,8 +65,9 @@ class ClienteController {
             // If exist: 
             if (json_cliente.length > 0) {
                 const template = require('../../Template/modal');
+                const { update_cliente } = require('../../Template/rules');
                 const html = template.create_modal_update('form_update_cliente', 'Modificar Cliente', json_cliente[0]);
-                response.send({ status: true, html: html });
+                response.send({ status: true, html: html, form: { id: 'form_update_cliente', rules: update_cliente, confirm: 'Esta seguro de actualizar el Cliente', url: '/cliente/update' } });
             } else {
                 response.send({ status: false, message: 'Cliente no encontrado' });   
             }

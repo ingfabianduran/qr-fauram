@@ -1,5 +1,3 @@
-const data = require("../data/data");
-
 const template = {
     create_modal_update (id_form, title, data, select) {
         let form = `<div class="modal-header bg-info">
@@ -36,10 +34,10 @@ const template = {
                 if (property === 'tipo' && select) {
                     return this.input_select(data, property, select);
                 } else {
-                    return `<label for="${property}">${this.spaces(property)}:</label><input type="text" class="form-control" id="${property}" value="${data[property]}">`;
+                    return `<label for="${property}">${this.spaces(property)}:</label><input type="text" class="form-control" id="${property}" name="${property}" value="${data[property]}">`;
                 }
             } else {
-                return `<input type="hidden" class="form-control" id="${property}" value="${data[property]}">`;
+                return `<input type="hidden" class="form-control" id="${property}" name="${property}" value="${data[property]}">`;
             } 
         } else {
             return '';

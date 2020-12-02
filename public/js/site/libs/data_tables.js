@@ -37,15 +37,27 @@ function view_update_modal(id_table, url) {
         const response = get(`${url}${id}`);
         response.then((data) => {
             if (data.html) {
-                load_preloader_container('modal_update', 10);
                 document.getElementById('modal_update_content').innerHTML = data.html;
+                load_preloader_container(data.form.id, 10);
                 $('#modal_update').modal('show');
-                stop_preloader('modal_update', 1000);
+                update_data(data.form.id, data.form.rules, data.form.confirm, data.form.url);
+                stop_preloader(data.form.id, 1000);
             } else {
                 toastr.info(data.message);
             }
         }).catch((err) => {
             toastr.error(err.message);
         });
+    });
+}
+
+function update_data(id_form, rules, message_confirm, url) {
+    $(`#${id_form}`).validate({
+        rules: rules,
+        submitHandler: function() {
+            show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Actualizar', (confirm) => {
+
+            });
+        }
     });
 }

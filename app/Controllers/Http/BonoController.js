@@ -166,7 +166,8 @@ class BonoController {
                 const template = require('../../Template/modal');
                 const { tipo_bonos } = require('../../data/data');
                 const html = template.create_modal_update('form_update_bono', 'Modificar Bono', bono_json[0], tipo_bonos);
-                response.send({ status: true, html: html });
+                const { update_bono } = require('../../Template/rules');
+                response.send({ status: true, html: html, form: { id: 'form_update_bono', rules: update_bono, confirm: 'Esta seguro de actualizar el Bono', url: '/bono/update' } });
             } else {
                 response.send({ status: false, message: 'Bono no encontrado' });
             }

@@ -1,6 +1,7 @@
 @layout('site')
 @section('content')
     @!component('components.data_table', data_table = data_table)
+    @!component('components.modal_update')
     {{--Js by this view--}}
     {{script('/js/site/compras.js')}}
 @endsection

@@ -1,5 +1,7 @@
 $(document).ready(function() {
     data_table_compra();
+    view_delete_confirm('tab_compras', 'Desea eliminar una Compra', '/compra/delete/');
+    view_update_modal('tab_compras', '/compra/search/update/');
 });
 // Create table by compra: 
 function data_table_compra() {

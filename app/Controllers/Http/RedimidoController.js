@@ -51,6 +51,24 @@ class RedimidoController {
             response.send({ status: false, message: `Error: ${error.code}` });
         }
     }
+
+    async search_redimido_by_id({request, response}) {
+        const id = request.params.id || '';
+        try {
+            const redimido = await Redimir.query().where('id', id).fetch();
+            const redimido_json = redimido.toJSON();
+            // If exist's? 
+            if (redimido_json.length > 0) {
+                const template = require('../../Template/modal');
+                const html = template.create_modal_update('form_update_redimido', 'Modificar Redimido', redimido_json[0]);
+                response.send({ status: true, html: html });
+            } else {
+                response.send({ status: false, message: 'Compra no encontrada' });
+            }
+        } catch (error) {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
+        }
+    }
 }
 
 module.exports = RedimidoController

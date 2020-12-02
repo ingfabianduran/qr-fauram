@@ -27,7 +27,7 @@ function get_rules() {
             },
             saldo: {
                 required: true,
-                digits: true
+                number: true
             },
             quien_redime: {
                 required: {
@@ -36,7 +36,7 @@ function get_rules() {
                         else return false;
                     }
                 },
-                rangelength: [3, 60]
+                rangelength: [3, 45]
             },
             correo: {
                 email: true
@@ -72,7 +72,7 @@ function get_rules() {
                 required: true,
                 digits: true
             }
-        }
+        },
     };
     return rules;
 }

@@ -61,7 +61,8 @@ class RedimidoController {
             if (redimido_json.length > 0) {
                 const template = require('../../Template/modal');
                 const html = template.create_modal_update('form_update_redimido', 'Modificar Redimido', redimido_json[0]);
-                response.send({ status: true, html: html });
+                const { update_redimir } = require('../../Template/rules');
+                response.send({ status: true, html: html, form: { id: 'form_update_redimido', rules: update_redimir, confirm: 'Esta seguro de actualizar el Redimido', url: '/redimir/update' } });
             } else {
                 response.send({ status: false, message: 'Compra no encontrada' });
             }

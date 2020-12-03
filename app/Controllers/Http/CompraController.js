@@ -32,7 +32,8 @@ class CompraController {
                 const template = require('../../Template/modal');
                 const { tipo_compras } = require('../../data/data');
                 const html = template.create_modal_update('form_update_compra', 'Modificar Compra', compra_json[0], tipo_compras);
-                response.send({ status: true, html: html });
+                const { update_compra } = require('../../Template/rules');
+                response.send({ status: true, html: html, form: { id: 'form_update_compra', rules: update_compra, confirm: 'Esta seguro de actualizar la Compra', url: '/compra/update' } });
             } else {
                 response.send({ status: false, message: 'Compra no encontrada' });
             }

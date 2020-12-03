@@ -51,6 +51,36 @@ const rules = {
             required: true,
             digits: true
         }
+    },
+    update_redimir: {
+        identificacion: {
+            required: true,
+            digits: true
+        }, 
+        valor: {
+            required: true,
+            number: true
+        },
+        contacto: {
+            digits: true
+        },
+        bono_id: {
+            required: true,
+            digits: true
+        }
+    },
+    update_compra: {
+        tipo: {
+            required: true
+        }, 
+        valor: {
+            required: true,
+            number: true
+        },
+        cliente_id: {
+            required: true,
+            digits: true
+        }
     }
 }
 

@@ -7,9 +7,7 @@ const template = {
                         </button>
                     </div><form id="${id_form}"><div class="modal-body">`;
         for (const property in data) {
-            form += `<div class="form-group">
-                        ${this.get_input(data, property, select)}
-                     </div>`;
+            form += this.get_input(data, property, select);
         }
         form += `</div>
                  <div class="modal-footer justify-content-between">
@@ -32,12 +30,12 @@ const template = {
         if (property != 'created_at' && property != 'updated_at') {
             if (property != 'id') {
                 if (property === 'tipo' && select) {
-                    return this.input_select(data, property, select);
+                    return `<div class="form-group">${this.input_select(data, property, select)}</div>`;
                 } else {
-                    return `<label for="${property}">${this.spaces(property)}:</label><input type="text" class="form-control" id="${property}" name="${property}" value="${data[property]}">`;
+                    return `<div class="form-group"><label for="${property}">${this.spaces(property)}:</label><input type="text" class="form-control" id="${property}" name="${property}" value="${data[property]}"></div>`;
                 }
             } else {
-                return `<input type="hidden" class="form-control" id="${property}" name="${property}" value="${data[property]}">`;
+                return `<div class="form-group"><input type="hidden" class="form-control" id="${property}" name="${property}" value="${data[property]}"></div>`;
             } 
         } else {
             return '';
@@ -45,7 +43,7 @@ const template = {
     },
 
     input_select(data, property, select) {
-        let input_select = `<label for="${property}">${this.spaces(property)}:</label>
+        let input_select = `<div class="form-group"><label for="${property}">${this.spaces(property)}:</label>
                             <select id="${property}" name="${property}" class="form-control custom-select">
                                 <option value="">Seleccioné un tipo</option>`;
         for (const i in select) {
@@ -55,7 +53,7 @@ const template = {
                 input_select += `<option value="${select[i].value}">${select[i].value}</option>`;
             }
         }
-        input_select += `</select>`;
+        input_select += `</select></div>`;
         return input_select;
     }
 }

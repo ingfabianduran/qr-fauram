@@ -56,7 +56,17 @@ function update_data(id_form, rules, message_confirm, url) {
         rules: rules,
         submitHandler: function() {
             show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Actualizar', (confirm) => {
+                if (confirm) {
+                    const data = serializarForm(id_form);
+                    const response = post(url, 'PUT', data); 
+                    load_preloader_container(id_form, 10); 
+                    response.then((res) => {
 
+                    }).catch((err) => {
+                        stop_preloader(id_form, 1000);
+                        toastr.error(err.message);
+                    }); 
+                }
             });
         }
     });

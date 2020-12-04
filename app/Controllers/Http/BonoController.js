@@ -3,7 +3,7 @@ const Bono = use('App/Models/Bono');
 const Compra = use('App/Models/Compra');
 
 const { validate } = use('Validator');
-const { rules_bono, rules_bono_update } = require('../../Validators/rules');
+const { rules_bono, rules_bono_update_saldo } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 const moment = require('moment');
@@ -105,7 +105,7 @@ class BonoController {
 
     async recargar_bono({request, response}) {
         const data_bono = request.post();
-        const is_valid = await validate(data_bono, rules_bono_update, messages);
+        const is_valid = await validate(data_bono, rules_bono_update_saldo, messages);
 
         if (!is_valid.fails()) {
             try {

@@ -50,7 +50,7 @@ function view_update_modal(id_table, url) {
         });
     });
 }
-
+// Http update 
 function update_data(id_form, rules, message_confirm, url) {
     $(`#${id_form}`).validate({
         rules: rules,

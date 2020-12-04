@@ -24,6 +24,10 @@ const rules = {
         }
     },
     update_bono: {
+        id: {
+            required: true,
+            digits: true
+        },
         tipo: {
             required: true
         },
@@ -53,6 +57,10 @@ const rules = {
         }
     },
     update_redimir: {
+        id: {
+            required: true,
+            digits: true
+        },
         identificacion: {
             required: true,
             digits: true
@@ -70,6 +78,10 @@ const rules = {
         }
     },
     update_compra: {
+        id: {
+            required: true,
+            digits: true
+        },
         tipo: {
             required: true
         }, 

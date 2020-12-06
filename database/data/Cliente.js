@@ -6,7 +6,7 @@ const DATA_CLIENTE = {
             identificacion: faker.random.number({min: 1000000000, max: 9999999999}),
             nombre: faker.name.firstName(),
             apellido: faker.name.lastName(),
-            contacto: faker.phone.phoneNumberFormat(),
+            contacto: `313${faker.random.number({min: 1000000, max: 9999999})}`,
             correo: faker.internet.email()
         }
         return cliente;

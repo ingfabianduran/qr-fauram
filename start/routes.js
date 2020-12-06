@@ -1,7 +1,5 @@
 'use strict'
 
-const { route } = require('@adonisjs/framework/src/Route/Manager');
-
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -17,6 +15,8 @@ const { route } = require('@adonisjs/framework/src/Route/Manager');
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
+
+Route.get('', 'UserController.index');
 
 Route.group(() => {
     Route.get('', 'BonoController.index');
@@ -50,3 +50,9 @@ Route.group(() => {
     Route.get('list', 'CompraController.list_compras');
     Route.get('search/update/:id', 'CompraController.search_compra_by_id');
 }).prefix('/compra/');
+
+Route.group(() => {
+    Route.get('', 'UserController.view_users');
+    Route.get('list', 'UserController.list_users');
+    Route.get('add', 'UserController.get_template_new_user');
+}).prefix('/user/');

@@ -1,10 +1,27 @@
 // Create data table: 
-function create_data_tables(id_table, colums, url) {
-    $(`#${id_table}`).DataTable({
-        ajax: url,
-        dataSrc: 'data',
-        columns: colums,
-    });
+function create_data_tables(id_table, colums, url, add_btn) {
+    if (add_btn === undefined) {
+        $(`#${id_table}`).DataTable({
+            ajax: url,
+            dataSrc: 'data',
+            columns: colums,
+        });
+    } else {
+        $(`#${id_table}`).DataTable({
+            ajax: url,
+            dataSrc: 'data',
+            columns: colums,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    text: '+',
+                    action: function () {
+                        alert( 'Button activated' );
+                    }
+                }
+            ]
+        });
+    }
 }
 // Create button's action's:
 function create_buttons_gestion(item) {

@@ -12,7 +12,7 @@ class ClienteController {
             id: 'tab_clientes',
             columnas: ['Identificación', 'Nombre', 'Apellidos', 'Contacto', 'Gestión']
         };
-        return view.render('clientes.edge', {data_table});
+        return view.render('clientes', {data_table});
     }
 
     async search_cliente({request, response}) {

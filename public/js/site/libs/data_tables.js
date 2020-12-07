@@ -95,3 +95,18 @@ function update_data(id_form, rules, message_confirm, url) {
         }
     });
 }
+// Print bono by datatable bonos: 
+function print_bono_pdf(id_table) {
+    $(`#${id_table} tbody`).on('click', '.btn-dark', function() {
+        const id = $(this).data('id');
+        show_alert_print_bono('Esta seguro???', '¿Desea imprimir el bono?', 'question', 'Generar PDF').then((text) => {
+            get_info_pdf(id).then((res) => {
+                if (res.status) {
+                    download_pdf(res.data.bono[0].tipo, res.data, res.message, text);
+                } else {
+                    toastr.error(res.message);
+                }
+            });
+        });
+    });
+}

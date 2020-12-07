@@ -95,18 +95,14 @@ function print_bono(bono) {
     const bt_print_bono = document.getElementById('bt_imprimir_pdf');
     bt_print_bono.classList.remove('disabled');
     bt_print_bono.addEventListener('click', (e) => {
-        show_alert_confirm('Esta seguro???', '¿Desea imprimir el bono?', 'question', 'Generar PDF', function(confirm) {
-            if (confirm) {
-                const url = `/bono/print/${bono.id}`;
-                const info_bono = get(url, 'GET'); 
-                info_bono.then((res) => {
-                    if (res.status) {
-                        download_pdf(res.data.bono[0].tipo, res.data, res.message);
-                    } else {
-                        toastr.error(res.message);
-                    }
-                });
-            }
+        show_alert_print_bono('Esta seguro???', '¿Desea imprimir el bono?', 'question', 'Generar PDF').then((text) => {
+            get_info_pdf(bono.id).then((res) => {
+                if (res.status) {
+                    download_pdf(res.data.bono[0].tipo, res.data, res.message, text);
+                } else {
+                    toastr.error(res.message);
+                }
+            });
         }); 
     });
 }

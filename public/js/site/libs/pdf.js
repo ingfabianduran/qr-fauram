@@ -1,5 +1,6 @@
 // PDF para recarga: 
-function content_pdf_recarga(data) {
+function content_pdf_recarga(data, mi_mensaje) {
+    const mensaje = (mi_mensaje === '') ? 'Compraste un Código QR que puedes recargar. Ahora puedes usarlo como medio de pago en nuestras instalaciones.' : mi_mensaje;
     const pdf_content = {
         content: [
             {
@@ -11,7 +12,7 @@ function content_pdf_recarga(data) {
                 style: 'user'
             },
             {
-                text: 'Compraste un Código QR que puedes recargar. Ahora puedes usarlo como medio de pago en nuestras instalaciones.',
+                text: mensaje,
                 style: 'body'
             },
             {
@@ -28,7 +29,8 @@ function content_pdf_recarga(data) {
     return pdf_content;
 }
 // PDF para regalo: 
-function content_pdf_regalo(data) {
+function content_pdf_regalo(data, mi_mensaje) {
+    const mensaje = (mi_mensaje === '') ? `${ data.bono[0].clientes.nombre } ${ data.bono[0].clientes.apellido } Quiere que vivas una experiencia maravillosa, te ha regalado un BONO con un codigo QR` : mi_mensaje;
     const pdf_content = {
         content: [
             {
@@ -40,7 +42,7 @@ function content_pdf_regalo(data) {
                 style: 'user'
             },
             {
-                text: `${ data.bono[0].clientes.nombre } ${ data.bono[0].clientes.apellido } Quiere que vivas una experiencia maravillosa, te ha regalado un BONO con un codigo QR`, 
+                text: mensaje, 
                 style: 'body'
             },
             {
@@ -90,7 +92,7 @@ function get_styles() {
     return styles;
 }
 // Download pdf: 
-function download_pdf(tipo, data, message) {
+function download_pdf(tipo, data, message, mi_mensaje) {
     try {
         pdfMake.fonts = {
             BarlowCondensed: {
@@ -101,11 +103,19 @@ function download_pdf(tipo, data, message) {
             }
         };
         
-        if (tipo === 'Regalo') pdfMake.createPdf(content_pdf_regalo(data)).open();
-        else if (tipo === 'Recarga') pdfMake.createPdf(content_pdf_recarga(data)).open();
-        else toastr.error('Faltan datos por generar');
-        toastr.success(message);
+        if (mi_mensaje != undefined) {
+            if (tipo === 'Regalo') pdfMake.createPdf(content_pdf_regalo(data, mi_mensaje)).open();
+            else if (tipo === 'Recarga') pdfMake.createPdf(content_pdf_recarga(data, mi_mensaje)).open();
+            else toastr.error('Faltan datos por generar');
+            toastr.success(message);
+        }
     } catch (error) {
         toastr.error(error);
     }
+}
+// Get info by bono selected: 
+async function get_info_pdf(id_bono) {
+    const url = `/bono/print/${id_bono}`;
+    const info_bono = await get(url, 'GET');
+    return info_bono;
 }

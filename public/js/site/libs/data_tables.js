@@ -16,7 +16,14 @@ function create_data_tables(id_table, colums, url, add_btn) {
                 {
                     text: '+',
                     action: function () {
-                        alert( 'Button activated' );
+                        const response = get('/user/add', 'GET');
+                        response.then((data) => {
+                            document.getElementById('modal_update_content').innerHTML = data.html;
+                            load_preloader_container(data.form.id, 10);
+                            $('#modal_update').modal('show');
+                            update_data(data.form.id, data.form.rules, data.form.confirm, data.form.url);
+                            stop_preloader(data.form.id, 1000);
+                        });
                     }
                 }
             ]

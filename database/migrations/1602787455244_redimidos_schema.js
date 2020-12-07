@@ -9,7 +9,7 @@ class RedimidosSchema extends Schema {
       table.increments()
       table.bigInteger('identificacion').notNullable()
       table.decimal('valor').notNullable()
-      table.string('contacto', 12)
+      table.string('contacto', 10)
       table.integer('bono_id').unsigned().references('id').inTable('bonos').notNullable()
       table.timestamps()
     })

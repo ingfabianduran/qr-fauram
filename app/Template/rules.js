@@ -93,6 +93,36 @@ const rules = {
             required: true,
             digits: true
         }
+    },
+    nuevo_cliente: {
+        nombre: {
+            required: true,
+            rangelength: [3, 45]
+        },
+        apellido: {
+            required: true,
+            rangelength: [3, 45]
+        },
+        rol: {
+            required: true
+        },
+        is_active: {
+            required: true
+        },
+        email: {
+            required: true,
+            email: true,
+            rangelength: [8, 45]
+        },
+        password: {
+            required: true,
+            rangelength: [8, 60]
+        },
+        confirm_password: {
+            required: true,
+            rangelength: [8, 60],
+            equalTo: '#password'
+        }
     }
 }
 

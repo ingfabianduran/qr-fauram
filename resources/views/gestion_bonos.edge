@@ -60,7 +60,7 @@
                                         <div class="form-group"> 
                                             <select id="tipo" name="tipo" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                                 <option value="" selected="selected">Tipo de bono</option>
-                                                @each(tipo in tipo_bono)
+                                                @each(tipo in tipo_bonos)
                                                     <option value="{{tipo.value}}">{{tipo.text}}</option>
                                                 @endeach
                                             </select> 
@@ -193,7 +193,12 @@
         </div>
     </div>
     {{--Js by this view--}}
+    {{script('/js/libs/instascan.min.js')}}
+    {{script('/js/libs/pdfmake.min.js')}}
+    {{script('/js/libs/vfs_fonts.min.js')}}
     {{script('/js/site/gestion_bono.js')}}
+    {{script('/js/site/libs/camara.js')}}
+    {{script('/js/site/libs/pdf.js')}}
     {{--Includes modal's in this view--}}
     @include('components.add_redimir')
     @include('components.add_cliente')

@@ -6,7 +6,6 @@ $(document).ready(function() {
 // Create table by bono: 
 function data_table_bono() {
     const columns = [
-        { data: 'id' },
         { data: 'tipo' },
         { 
             data: null,
@@ -23,10 +22,15 @@ function data_table_bono() {
         {
             data: null,
             render: (item) => {
+                return item.clientes.identificacion;
+            } 
+        },
+        {
+            data: null,
+            render: (item) => {
                 return `${item.clientes.nombre} ${item.clientes.apellido}`;
             }
         },
-        { data: 'created_at' },
         { 
             data: null, 
             render: (item) => { 

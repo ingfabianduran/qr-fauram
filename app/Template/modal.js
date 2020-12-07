@@ -25,8 +25,13 @@ const template = {
                     return `<div class="form-group">${this.input_select(data, property, select)}</div>`;
                 } else if (property === 'is_active') {
                     return `<div class="form-group form-check"><input type="checkbox" class="form-check-input" id="${property}"><label class="form-check-label" for="${property}">${this.spaces(property)}</label></div>`;
+                } else if (property === 'password') {
+                    return `<div class="form-group"><label for="${property}">${this.spaces(property)}:</label><input type="password" class="form-control" id="${property}" name="${property}" value="${data[property]}" placeholder="${this.spaces(property)}"></div>`;
+                } else if (property === 'confirm_password') {
+                    return `<div class="form-group"><label for="${property}">${this.spaces(property)}:</label><input type="password" class="form-control" id="${property}" name="${property}" value="${data[property]}" placeholder="${this.spaces(property)}"></div>`;
                 } else {
-                    return `<div class="form-group"><label for="${property}">${this.spaces(property)}:</label><input type="text" class="form-control" id="${property}" name="${property}" value="${data[property]}"></div>`;
+                    return `<div class="form-group"><label for="${property}">${this.spaces(property)}:</label><input type="text" class="form-control" id="${property}" name="${property}" value="${data[property]}" placeholder="${this.spaces(property)}"></div>`;
+
                 }
             } else {
                 return `<div class="form-group"><input type="hidden" class="form-control" id="${property}" name="${property}" value="${data[property]}"></div>`;
@@ -48,7 +53,6 @@ const template = {
             }
         }
         input_select += `</select></div>`;
-        console.log(input_select);
         return input_select;
     },
 

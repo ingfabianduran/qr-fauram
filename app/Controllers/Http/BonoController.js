@@ -14,7 +14,7 @@ class BonoController {
         const data_table = {
             titulo: 'Listado de Bonos',
             id: 'tab_bonos',
-            columnas: ['ID', 'Tipo', 'Quien redime', 'Saldo', 'Cliente', 'Fecha de compra', 'Gestión']
+            columnas: ['Tipo', 'Quien redime', 'Saldo', 'Identificación', 'Nombre Cliente', 'Gestión']
         };
         return view.render('bonos', {data_table}); 
     }

@@ -29,9 +29,10 @@ class UserController {
     get_template_new_user({response}) {
         const template = require('../../Template/modal');
         const { tipo_roles } = require('../../data/data');
-        const user = { nombre: '', apellido: '', rol: '', is_active: '', email: '', password: '' };
+        const { nuevo_cliente } = require('../../Template/rules');
+        const user = { nombre: '', apellido: '', rol: '', email: '', password: '', confirm_password: '', is_active: '' };
         const html = template.create_modal_update('form_new_user', 'Nuevo Usuario', user, tipo_roles);
-        response.send({html: html});
+        response.send({html: html, form: { id: 'form_new_user', rules: nuevo_cliente, confirm: 'Esta seguro de agregar un nuevo usuario', url: '/user/add' }});
     }
 }
 

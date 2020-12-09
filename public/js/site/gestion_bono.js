@@ -72,18 +72,18 @@ function validate_form_add_bono(id_form, rules, message_confirm, url) {
                     const response = post(url, 'POST', data);
                     response.then((res) => {
                         if (res.status) {
-                            stop_preloader(id_form, 1000);
-                            toastr.success(res.message);
+                            show_alert('Enhorabuena!!!', res.message, 'success');
+                            stop_preloader(id_form, 100);
                             document.getElementById('image_qr').src = res.data.qr;
                             reset_form_by_http(id_form);
                             print_bono(res.data.bono);
                         } else {
-                            stop_preloader(id_form, 1000);
-                            toastr.error(res.message);
+                            show_alert('Ops!!!', res.message, 'error');
+                            stop_preloader(id_form, 100);
                         }
                     }).catch((err) => {
-                        stop_preloader(id_form, 1000);
-                        toastr.error(err.message);
+                        show_alert('Ops!!!', err.message, 'error');
+                        stop_preloader(id_form, 100);
                     });       
                 }
             });
@@ -119,17 +119,17 @@ function validate_form_recargar_bono(id_form, rules, message_confirm, url) {
                     load_preloader_container(id_form, 10);
                     response.then((res) => {
                         if (res.status) {
-                            stop_preloader(id_form, 1000);
-                            toastr.success(res.message);
+                            stop_preloader(id_form, 100);
+                            show_alert('Enhorabuena!!!', res.message, 'success');
                             reset_form_by_http(id_form);
                             document.getElementById('span_bono_id').textContent = 'No consultado';
                         } else {
-                            stop_preloader(id_form, 1000);
-                            toastr.error(res.message);
+                            stop_preloader(id_form, 100);
+                            show_alert('Ops!!!', res.message, 'error');
                         }
                     }).catch((err) => {
-                        stop_preloader(id_form, 1000);
-                        toastr.error(err.message);
+                        stop_preloader(id_form, 100);
+                        show_alert('Ops!!!', err.message, 'error');
                     });
                 }
             });
@@ -148,13 +148,13 @@ function validate_form_redimir_bono(id_form, rules, message_confirm, url) {
                     const response = post(url, 'POST', data);
                     load_preloader_container(id_form, 10);
                     response.then((res) => {
-                        if (res.status) toastr.success(res.message);
+                        if (res.status) show_alert('Enhorabuena!!!', res.message, 'success');
                         else toastr.error(res.message);
-                        stop_preloader(id_form, 1000);
+                        stop_preloader(id_form, 100);
                         $('#modal_add_redimir').modal('hide');
                     }).catch((err) => {
-                        stop_preloader(id_form, 1000);
-                        toastr.error(err.message);
+                        stop_preloader(id_form, 100);
+                        show_alert('Ops!!!', err.message, 'error');
                     });
                 }
             });

@@ -29,8 +29,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
-                            <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#modal_add_cliente">Cliente</button>
+                        <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 align-self-center justify-content-center">
+                            <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#modal_add_cliente">Agregar Cliente</button>
+                            <a href="/bono/gestion" class="btn btn-danger btn-block btn-lg">Cancelar</a>
                         </div>
                     </div>
                 </div>
@@ -43,7 +44,7 @@
                 <div class="container">
                     <h1 class="display-4">Generar Bono</h1>
                     <p class="lead">Para generar un bono por favor agregue o consulte un cliente en el boton que se encuentra a continuación:</p>
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_add_cliente">Gestionar Cliente</button>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_add_cliente">Agregar Cliente</button>
                 </div>
             </div>
             <div id="container_create_bono" class="card d-none">
@@ -96,7 +97,7 @@
                                         <button type="submit" class="btn btn-success btn-lg">Registrar</button>
                                     </div>
                                     <div class="col">
-                                        <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
+                                        <a href="/bono/gestion" class="btn btn-danger btn-lg">Cancelar</a>
                                     </div>
                                 </div>
                             </form>
@@ -105,17 +106,9 @@
                             <img id="image_qr" src="{{assetsUrl('img/qr.png')}}" width="150" height="150" class="rounded">
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 align-self-center text-center mt-2">
-                            <div class="row">   
-                                <div class="col">
-                                        <button type="button" class="btn btn-block btn-primary disabled">Enviar QR</button>
-                                    </div>
-                                </div>
-                                <div class="row mt-1">
-                                    <div class="col">
-                                        <button id="bt_imprimir_pdf" type="button" class="btn btn-block btn-primary disabled">Imprimir QR</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <button type="button" class="btn btn-block btn-primary disabled"><i class="fa fa-envelope-open-text"></i> Enviar QR</button>
+                            <button id="bt_imprimir_pdf" type="button" class="btn btn-block btn-dark disabled"><i class="fa fa-file-pdf"></i> Imprimir QR</button>
+                            <a href="/bono/gestion" class="btn btn-block btn-danger">Cancelar</a>
                         </div>
                     </div>
                 </div>

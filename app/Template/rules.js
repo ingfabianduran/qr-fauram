@@ -94,7 +94,7 @@ const rules = {
             digits: true
         }
     },
-    nuevo_cliente: {
+    nuevo_usuario: {
         nombre: {
             required: true,
             rangelength: [3, 45]
@@ -104,9 +104,6 @@ const rules = {
             rangelength: [3, 45]
         },
         rol: {
-            required: true
-        },
-        is_active: {
             required: true
         },
         email: {
@@ -119,6 +116,37 @@ const rules = {
             rangelength: [8, 60]
         },
         confirm_password: {
+            required: true,
+            rangelength: [8, 60],
+            equalTo: '#password'
+        }
+    },
+    update_usuario: {
+        id: {
+            required: true,
+            digits: true
+        },
+        nombre: {
+            required: true,
+            rangelength: [3, 45]
+        },
+        apellido: {
+            required: true,
+            rangelength: [3, 45]
+        },
+        rol: {
+            required: true
+        },
+        email: {
+            required: true,
+            email: true,
+            rangelength: [8, 45]
+        },
+        password: {
+            required: true,
+            rangelength: [8, 60]
+        },
+        password_confirmation: {
             required: true,
             rangelength: [8, 60],
             equalTo: '#password'

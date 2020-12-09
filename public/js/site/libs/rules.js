@@ -8,17 +8,18 @@ function get_rules() {
             },
             nombre: {
                 required: true,
-                rangelength: [3, 60]
+                rangelength: [3, 45]
             },
             apellido: {
                 required: true,
-                rangelength: [3, 60]
+                rangelength: [3, 45]
             },
             contacto: {
                 digits: true
             },
             correo: {
-                email: true
+                email: true,
+                rangelength: [8, 80]
             }
         }, 
         bono: {
@@ -36,7 +37,7 @@ function get_rules() {
                         else return false;
                     }
                 },
-                rangelength: [3, 45]
+                rangelength: [3, 80]
             },
             correo: {
                 email: true
@@ -61,10 +62,18 @@ function get_rules() {
                 required: true,
                 digits: true,
             },
+            nombre_quien_redime: {
+                required: true,
+                rangelength: [8, 80]
+            },
             contacto: {
                 digits: true
             },
             valor: {
+                required: true,
+                digits: true
+            },
+            n_factura: {
                 required: true,
                 digits: true
             },

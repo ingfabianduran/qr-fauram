@@ -8,8 +8,10 @@ class RedimidosSchema extends Schema {
     this.create('redimidos', (table) => {
       table.increments()
       table.bigInteger('identificacion').notNullable()
+      table.string('nombre_quien_redime', 80).notNullable()
       table.decimal('valor').notNullable()
       table.string('contacto', 10)
+      table.integer('n_factura').notNullable()
       table.integer('bono_id').unsigned().references('id').inTable('bonos').notNullable()
       table.timestamps()
     })

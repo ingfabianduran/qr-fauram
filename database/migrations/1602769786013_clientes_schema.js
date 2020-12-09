@@ -11,7 +11,7 @@ class ClientesSchema extends Schema {
       table.string('nombre', 45).notNullable()
       table.string('apellido', 45).notNullable()
       table.string('contacto', 10)
-      table.string('correo', 45)
+      table.string('correo', 80)
       table.timestamps()
     })
   }

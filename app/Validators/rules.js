@@ -4,13 +4,13 @@ const rules = {
         nombre: 'required|min:3|max:45',
         apellido: 'required|min:3|max:45',
         contacto: 'min:10|max:10',
-        correo: 'email|min:8|max:45'
+        correo: 'email|min:8|max:80'
     },
     rules_bono: {
         cliente_id: 'required|integer',
         tipo: 'required|in:Regalo,Recarga',
         saldo: 'required|number',
-        quien_redime: 'required_when:tipo,Regalo',
+        quien_redime: 'required_when:tipo,Regalo|min:3|max:80',
         correo: 'email|min:8|max:45'
     },
     rules_bono_update_saldo: {
@@ -20,8 +20,10 @@ const rules = {
     },
     rules_bono_redimir: {
         identificacion: 'required|integer',
+        nombre_quien_redime: 'required|min:8|max:80',
         contacto: 'integer',
         valor: 'required|number',
+        n_factura: 'required|integer',
         bono_id: 'required|integer'
     },
     rules_user: {
@@ -29,9 +31,9 @@ const rules = {
         apellido: 'required|min:3|max:45',
         rol: 'required|in:admin,standard',
         is_active: 'boolean',
-        email: 'email|min:8|max:45|unique:users',
-        password: 'required|min:8|max:60',
-        confirm_password: 'required|min:8|max:60|confirmed'
+        email: 'email|min:8|max:80|unique:users',
+        password: 'required|min:8|max:60|confirmed',
+        password_confirmation: 'required|min:8|max:60'
     }, 
     rules_update_cliente: {
         id: 'required|integer',

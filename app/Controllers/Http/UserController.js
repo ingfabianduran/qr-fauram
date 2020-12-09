@@ -76,6 +76,22 @@ class UserController {
             response.send({ status: false, message: `Error: ${error.code}` });
         }
     }
+
+    async logIn({auth, request, response}) {
+        const data_user = request.post();
+        const isValidSession = await auth.attempt(data_user.email, data_user.password);
+        
+        if (isValidSession) {
+            response.send({ status: true, message: 'Bienvenido a QR Fauram' });
+        }
+
+        response.send({ status: false, message: 'Usuario o contraseña incorrecta' });
+    }
+
+    async logout({auth, response}) {
+        await auth.logout();
+        response.redirect('/');
+    }
 }
 
 module.exports = UserController

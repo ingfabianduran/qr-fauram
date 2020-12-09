@@ -56,5 +56,7 @@ Route.group(() => {
     Route.get('list', 'UserController.list_users');
     Route.get('add/template', 'UserController.get_template_new_user');
     Route.get('search/update/:id', 'UserController.search_user_by_id');
+    Route.get('logout', 'UserController.logout');
     Route.post('add', 'UserController.add_user');
+    Route.post('login', 'UserController.logIn');
 }).prefix('/user/');

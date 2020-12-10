@@ -14,14 +14,14 @@ class BonoController {
         const data_table = {
             titulo: 'Listado de Bonos',
             id: 'tab_bonos',
-            columnas: ['Tipo', 'Quien redime', 'Saldo', 'Identificación', 'Nombre Cliente', 'Gestión']
+            columnas: ['Tipo', 'Quien redime', 'Saldo', 'Identificación', 'Nombre Cliente', 'Gestión'],
         };
-        return view.render('bonos', {data_table}); 
+        return view.render('bonos', {data_table: data_table, title: 'Listado de Bonos'}); 
     }
 
     gestion({view}) {
         const { tipo_bonos } = require('../../data/data');
-        return view.render('gestion_bonos', {tipo_bonos});
+        return view.render('gestion_bonos', {tipo_bonos, title: 'Gestión de Bonos'});
     }
 
     async validate_bono({request, response}) {

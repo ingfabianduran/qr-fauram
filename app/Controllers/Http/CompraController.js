@@ -9,7 +9,7 @@ class CompraController {
             id: 'tab_compras',
             columnas: ['Tipo de compra', 'Valor', 'Cliente', 'Fecha', 'Gestión']
         }
-        return view.render('compras', {data_table});
+        return view.render('compras', {data_table: data_table, title: 'Listado de Compras'});
     }
 
     async list_compras({response}) {

@@ -82,6 +82,15 @@ function get_rules() {
                 digits: true
             }
         },
+        user: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true
+            }
+        }
     };
     return rules;
 }

@@ -7,8 +7,13 @@ const { rules_user, rules_update_user } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 class UserController {
-    index({view}) {
-        return view.render('index');
+    async index({view, response, auth}) {
+        try {
+            const user = await auth.getUser();
+            response.redirect('/bono/gestion');
+        } catch (error) {
+            return view.render('index', {title: 'QR Fauram'});
+        }
     }
 
     view_users({view}) {
@@ -77,15 +82,15 @@ class UserController {
         }
     }
 
-    async logIn({auth, request, response}) {
+    async logIn({request, response, auth}) {
         const data_user = request.post();
-        const isValidSession = await auth.attempt(data_user.email, data_user.password);
         
-        if (isValidSession) {
+        try {
+            const isValidSession = await auth.attempt(data_user.email, data_user.password);
             response.send({ status: true, message: 'Bienvenido a QR Fauram' });
+        } catch (error) {
+            response.send({ status: false, message: 'Usuario o contraseña incorrecta' });
         }
-
-        response.send({ status: false, message: 'Usuario o contraseña incorrecta' });
     }
 
     async logout({auth, response}) {

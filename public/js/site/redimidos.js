@@ -14,7 +14,12 @@ function data_table_redimido() {
             } 
         },
         { data: 'created_at' },
-        { data: 'bono_id' },
+        { 
+            data: null,
+            render: (item) => {
+                return `${item.nombre_quien_redime}`;
+            }
+        },
         { 
             data: null, 
             render: (item) => { 

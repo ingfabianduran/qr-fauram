@@ -17,6 +17,8 @@ $(document).ready(function() {
     validate_form_redimir_bono('form_add_redimir', get_rules().bono_redimir, '¿Desea redimir el bono?', '/redimir/add');
     // Reset values by form add redimir: 
     reset_form_by_event('modal_add_redimir', 'form_add_redimir');
+
+    event_check_soy_dueno();
 });
 // Event lost focus in input identificacion: 
 function get_data_search_cliente() {
@@ -174,4 +176,19 @@ function events_register_cliente(message) {
     toastr.success(message);
     document.getElementById('container_create_bono').classList.remove('d-none');
     document.getElementById('container_info').classList.add('d-none');
+}
+
+function event_check_soy_dueno() {
+    const checkbox = document.getElementById('soy_dueno');
+    checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+            document.getElementById('identificacion').value = localStorage.getItem('identificacion');
+            document.getElementById('nombre_quien_redime').value = localStorage.getItem('nombre_quien_redime');
+            document.getElementById('contacto').value = localStorage.getItem('contacto');
+        } else {
+            document.getElementById('identificacion').value = '';
+            document.getElementById('nombre_quien_redime').value = ''; 
+            document.getElementById('contacto').value = ''
+        }
+    });
 }

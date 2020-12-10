@@ -75,14 +75,24 @@ function read_qr_redimir(id_select, id_video, cameras) {
                     document.getElementById('bono_id').value = res.bono[0].id;
                     // Set form when bono equals Recarga: 
                     if (res.bono[0].tipo === 'Recarga') {
-                        document.getElementById('identificacion').value = res.bono[0].clientes.identificacion; 
+                        // LocalStorage:
+                        save_info_redime(res);
+                        document.getElementById('identificacion').value = res.bono[0].clientes.identificacion;
+                        document.getElementById('nombre_quien_redime').value = `${res.bono[0].clientes.nombre} ${res.bono[0].clientes.apellido}`;
                         document.getElementById('contacto').value = res.bono[0].clientes.contacto;
+                        // CheckBox: 
+                        document.getElementById('soy_dueno').disabled = false;
+                    } else if (res.bono[0].tipo === 'Regalo') {
+                        document.getElementById('nombre_quien_redime').value = res.bono[0].quien_redime;
+                        // CheckBox: 
+                        document.getElementById('soy_dueno').disabled = true;
                     }
                     stop_preloader('modal_add_redimir', 2000);
                 } else {
                     toastr.info(res.message);
                 }
             }).catch((err) => {
+                stop_preloader('modal_add_redimir', 2000);
                 toastr.error(err.message);
             });
         }
@@ -96,4 +106,10 @@ function read_qr_redimir(id_select, id_video, cameras) {
             }
         }  
     });
+}
+// Set localstorage: 
+function save_info_redime(info) {
+    localStorage.setItem('identificacion', info.bono[0].clientes.identificacion);
+    localStorage.setItem('nombre_quien_redime', `${info.bono[0].clientes.nombre} ${info.bono[0].clientes.apellido}`);
+    localStorage.setItem('contacto', info.bono[0].clientes.contacto);
 }

@@ -80,6 +80,7 @@ class BonoController {
         try {
             const bono = await Bono.query().where('contenido', content_bono).fetch();
             const bono_json = bono.toJSON();
+            
             // If exist's? 
             if (bono_json.length > 0) {
                 response.send({ status: true, message: 'Bono encontrado con exito', bono: bono_json });
@@ -132,6 +133,7 @@ class BonoController {
 
     async search_bono_by_redimir({request, response}) {
         const content_bono = request.params.content || '';
+        
         try {
             const bono = await Bono.query().with('clientes').where({ 'contenido': content_bono }).fetch();
             const json_bono = bono.toJSON();

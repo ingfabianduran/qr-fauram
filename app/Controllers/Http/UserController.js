@@ -16,13 +16,15 @@ class UserController {
         }
     }
 
-    view_users({view}) {
+    async view_users({view}) {
         const data_table = {
             titulo: 'Listado de Usuarios',
             id: 'tab_usuarios',
             columnas: ['Nombre', 'Apellido', 'Rol', 'Estado', 'Gestión']
         };
-        return view.render('users', {data_table});
+        const user = await auth.getUser();
+        const json_user = user.toJSON();
+        return view.render('users', {data_table: data_table, title: 'Listado de Usuarios', user: json_user});
     }
 
     async list_users({response}) {

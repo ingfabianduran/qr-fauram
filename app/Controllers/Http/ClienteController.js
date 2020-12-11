@@ -12,7 +12,9 @@ class ClienteController {
             id: 'tab_clientes',
             columnas: ['Identificación', 'Nombre', 'Apellidos', 'Contacto', 'Gestión']
         };
-        return view.render('clientes', {data_table: data_table, title: 'Listado de Clientes'});
+        const user = await auth.getUser();
+        const json_user = user.toJSON();
+        return view.render('clientes', {data_table: data_table, title: 'Listado de Clientes', user: json_user});
     }
 
     async search_cliente({request, response}) {

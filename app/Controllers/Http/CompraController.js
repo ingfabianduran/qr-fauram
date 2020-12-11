@@ -9,7 +9,9 @@ class CompraController {
             id: 'tab_compras',
             columnas: ['Tipo de compra', 'Valor', 'Cliente', 'Fecha', 'Gestión']
         }
-        return view.render('compras', {data_table: data_table, title: 'Listado de Compras'});
+        const user = await auth.getUser();
+        const json_user = user.toJSON();
+        return view.render('compras', {data_table: data_table, title: 'Listado de Compras', user: json_user});
     }
 
     async list_compras({response}) {

@@ -14,7 +14,9 @@ class RedimidoController {
             id: 'tab_redimidos',
             columnas: ['Documento', 'Valor', 'Fecha', 'Quien Redime', 'Gestión']
         };
-        return view.render('redimidos', {data_table: data_table, title: 'Listado de Redimidos'}); 
+        const user = await auth.getUser();
+        const json_user = user.toJSON();
+        return view.render('redimidos', {data_table: data_table, title: 'Listado de Redimidos', user: json_user}); 
     }
 
     async redimir_bono({request, response}) {

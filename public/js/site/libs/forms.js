@@ -15,6 +15,8 @@ function reset_form_by_event(modal, form) {
             $(`#${form} .invalid-feedback`).remove()
             $(`#${form} input`).removeClass('is-valid');
             $(`#${form} input`).removeClass('is-invalid');
+            $(`#${form} .custom-select`).removeClass('is-invalid');
+            $(`#${form} .custom-select`).removeClass('is-valid');
             document.getElementById(form).reset();
             $(`#${form} .select2`).val(null).trigger('change');
         });
@@ -23,6 +25,8 @@ function reset_form_by_event(modal, form) {
             $(`#${form} .invalid-feedback`).remove()
             $(`#${form} input`).removeClass('is-valid');
             $(`#${form} input`).removeClass('is-invalid');
+            $(`#${form} .custom-select`).removeClass('is-invalid');
+            $(`#${form} .custom-select`).removeClass('is-valid');
             document.getElementById(form).reset();
             $(`#${form} .select2`).val(null).trigger('change');
         });
@@ -33,6 +37,8 @@ function reset_form_by_http(form) {
     $(`#${form} .invalid-feedback`).remove()
     $(`#${form} input`).removeClass('is-valid');
     $(`#${form} input`).removeClass('is-invalid');
+    $(`#${form} .custom-select`).removeClass('is-invalid');
+    $(`#${form} .custom-select`).removeClass('is-valid');
     document.getElementById(form).reset();
     $(`#${form} .select2`).val(null).trigger('change');
 }

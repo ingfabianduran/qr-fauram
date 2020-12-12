@@ -37,7 +37,7 @@ const rules = {
     }, 
     rules_update_cliente: {
         id: 'required|integer',
-        identificacion: 'required|integer|unique:clientes',
+        identificacion: 'required|integer',
         nombre: 'required|min:3|max:45',
         apellido: 'required|min:3|max:45',
         contacto: 'min:10|max:10',
@@ -45,7 +45,7 @@ const rules = {
     },
     rules_update_bono: {
         id: 'required|integer',
-        contenido: 'required|unique:bonos',
+        contenido: 'required',
         cliente_id: 'required|integer',
         tipo: 'required|in:Regalo,Recarga',
         saldo: 'required|number',
@@ -71,9 +71,9 @@ const rules = {
         apellido: 'required|min:3|max:45',
         rol: 'required|in:admin,standard',
         is_active: 'boolean',
-        email: 'email|min:8|max:45|unique:users',
-        password: 'required|min:8|max:60',
-        confirm_password: 'required|min:8|max:60|confirmed'
+        email: 'email|min:8|max:45',
+        password: 'required|min:8|max:60|confirmed',
+        password_confirmation: 'required|min:8|max:60'
     }
 };
 

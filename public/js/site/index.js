@@ -8,8 +8,10 @@ function validate_form_sesion(id_form, rules, url) {
         submitHandler: function() {
             const data = serializarForm(id_form);
             const response = post(url, 'POST', data);
+            load_preloader_container(id_form, 20);
             response.then((res) => {
                 if (res.status) {
+                    stop_preloader(id_form, 500);
                     toastr.success(res.message);
                     setTimeout(() => {
                         location.href = '/bono/gestion';

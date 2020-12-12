@@ -11,7 +11,6 @@ const DATA_USER = {
                 is_active: faker.random.boolean(),
                 email: faker.internet.email(),
                 password: `Lenovo2020`,
-                password_confirmation: `Lenovo2020`
             };
             const user = await User.create(user_data);
         }

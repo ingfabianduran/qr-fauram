@@ -17,7 +17,6 @@ class User extends Model {
     this.addHook('beforeSave', async (userInstance) => {
       if (userInstance.dirty.password) {
         userInstance.password = await Hash.make(userInstance.password)
-        userInstance.password_confirmation = await Hash.make(userInstance.password_confirmation)
       }
     })
   }

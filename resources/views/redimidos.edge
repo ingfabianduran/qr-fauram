@@ -1,7 +1,28 @@
 @layout('site')
 @section('content')
     @!component('components.data_table', data_table = data_table)
-    @!component('components.modal_update')
+    @component('components.modal_form', id_modal = 'modal_update', id_form = 'form_update_redimido', title_modal = 'Actualizar Redimido')
+        @slot('body')
+            {{ csrfField() }}
+            <input type="hidden" id="id" name="id">
+            <div class="form-group">
+                <label for="identificacion">Identificación:</label>
+                <input type="text" class="form-control" id="identificacion" name="identificacion" placeholder="Identificación de quien redime">
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor:</label>
+                <input type="text" class="form-control" id="valor" name="valor" placeholder="Valor a redimir">
+            </div>
+            <div class="form-group">
+                <label for="contacto">Contacto:</label>
+                <input type="text" class="form-control" id="contacto" name="contacto" placeholder="Contacto de quien redime">
+            </div>
+            <div class="form-group">
+                <label for="bono_id">Codigo del bono:</label>
+                <input type="text" class="form-control" id="bono_id" name="bono_id" placeholder="Codigo del bono">
+            </div>
+        @endslot
+    @endcomponent
     {{--Js by this view--}}
     {{script('/js/site/redimidos.js')}}
     {{script('/js/libs/datatables.min.js')}}     

@@ -16,14 +16,7 @@ function create_data_tables(id_table, colums, url, add_btn) {
                 {
                     text: '+',
                     action: function () {
-                        const response = get('/user/add/template', 'GET');
-                        response.then((data) => {
-                            document.getElementById('modal_update_content').innerHTML = data.html;
-                            load_preloader_container(data.form.id, 10);
-                            $('#modal_update').modal('show');
-                            new_data(data.form.id, data.form.rules, data.form.confirm, data.form.url);
-                            stop_preloader(data.form.id, 1000);
-                        });
+                        location.href = '/user/add';
                     }
                 }
             ]
@@ -46,7 +39,7 @@ function view_delete_confirm(id_table, message, url) {
             if (confirm) {
                 const response = get(`${url}${id}`, 'DELETE');
                 response.then((data) => {
-
+                    
                 }).catch((err) => {
                     toastr.error(err.message);
                 }); 
@@ -59,16 +52,12 @@ function view_update_modal(id_table, url) {
     $(`#${id_table} tbody`).on('click', '.btn-info', function() {
         const id = $(this).data('id');
         const response = get(`${url}${id}`);
-        response.then((data) => {
-            if (data.html) {
-                document.getElementById('modal_update_content').innerHTML = data.html;
-                load_preloader_container(data.form.id, 10);
-                $('#modal_update').modal('show');
-                update_data(data.form.id, data.form.rules, data.form.confirm, data.form.url);
-                stop_preloader(data.form.id, 1000);
-            } else {
-                toastr.info(data.message);
-            }
+        response.then((res) => {
+            load_preloader_container(res.form.id, 10);
+            $('#modal_update').modal('show');
+            set_data_in_form(res.form.id, res.data);
+            stop_preloader(res.form.id, 1000);
+            update_data(res.form.id, res.form.rules, res.form.confirm, res.form.url);
         }).catch((err) => {
             toastr.error(err.message);
         });
@@ -85,10 +74,18 @@ function update_data(id_form, rules, message_confirm, url) {
                     const response = post(url, 'PUT', data); 
                     load_preloader_container(id_form, 10); 
                     response.then((res) => {
-
+                        stop_preloader(id_form, 500);
+                        $('#modal_update').modal('hide');
+                        if (res.status) {
+                            show_alert('Enhorabuena!!!', res.message, 'success');
+                            reset_form_by_event('modal_update', id_form);
+                            $(`#${res.table}`).DataTable().ajax.reload();
+                        } else {
+                            show_alert('Ops!!!', res.message, 'error');
+                        }
                     }).catch((err) => {
-                        stop_preloader(id_form, 1000);
-                        toastr.error(err.message);
+                        stop_preloader(id_form, 500);
+                        show_alert('Ops!!!', err.message, 'error');
                     }); 
                 }
             });
@@ -110,30 +107,17 @@ function print_bono_pdf(id_table) {
         });
     });
 }
-// Http New 
-function new_data(id_form, rules, message_confirm, url) {
-    $(`#${id_form}`).validate({
-        rules: rules,
-        submitHandler: function() {
-            show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Agregar', (confirm) => {
-                if (confirm) {
-                    const data = serializarForm(id_form);
-                    const response = post(url, 'POST', data); 
-                    load_preloader_container(id_form, 10); 
-                    response.then((res) => {
-                        stop_preloader(id_form, 1000);
-                        if (res.status) {
-                            $('#modal_update').modal('hide');
-                            show_alert('Enhorabuena!!!', res.message, 'success');
-                        } else {
-                            show_alert('Ops!!!', res.message, 'error');
-                        } 
-                    }).catch((err) => {
-                        stop_preloader(id_form, 1000);
-                        toastr.error(err.message);
-                    });
-                }
-            });
+// Set data into form: 
+function set_data_in_form(id_form, data) {
+    const form = document.getElementById(id_form);
+    const form_data = new FormData(form);
+    
+    for (const i in data) {
+        for (const j of form_data.keys()) {
+            if (i === j) {
+                document.getElementById(j).value = data[i];
+                break;
+            }
         }
-    });
+    }
 }

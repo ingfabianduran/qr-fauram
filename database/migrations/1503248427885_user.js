@@ -13,7 +13,6 @@ class UserSchema extends Schema {
       table.boolean('is_active').defaultTo(false).notNullable()
       table.string('email', 45).notNullable().unique()
       table.string('password', 60).notNullable()
-      table.string('password_confirmation', 60).notNullable()
       table.timestamps()
     })
   }

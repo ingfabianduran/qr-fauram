@@ -16,7 +16,7 @@ class UserController {
         }
     }
 
-    async view_users({view}) {
+    async view_users({view, auth}) {
         const data_table = {
             titulo: 'Listado de Usuarios',
             id: 'tab_usuarios',
@@ -24,7 +24,15 @@ class UserController {
         };
         const user = await auth.getUser();
         const json_user = user.toJSON();
-        return view.render('users', {data_table: data_table, title: 'Listado de Usuarios', user: json_user});
+        const { tipo_roles } = require('../../data/data');
+        return view.render('users', {data_table: data_table, title: 'Listado de Usuarios', user: json_user, tipo_roles: tipo_roles});
+    }
+
+    async view_form_new_user({view, auth}) {
+        const user = await auth.getUser();
+        const json_user = user.toJSON();
+        const { tipo_roles } = require('../../data/data');
+        return view.render('add_user', {tipo_roles: tipo_roles, user: json_user});
     }
 
     async list_users({response}) {
@@ -37,15 +45,6 @@ class UserController {
         }
     }
 
-    get_template_new_user({response}) {
-        const template = require('../../Template/modal');
-        const { tipo_roles } = require('../../data/data');
-        const { nuevo_usuario } = require('../../Template/rules');
-        const user = { nombre: '', apellido: '', rol: '', email: '', password: '', password_confirmation: '', is_active: '' };
-        const html = template.create_modal_update('form_new_user', 'Nuevo Usuario', user, tipo_roles);
-        response.send({html: html, form: { id: 'form_new_user', rules: nuevo_usuario, confirm: 'Esta seguro de agregar un nuevo usuario', url: '/user/add' }});
-    }
-
     async add_user({request, response}) {
         let data_user = request.post();
         data_user.is_active = (data_user.is_active === 'on') ? true : false;
@@ -53,9 +52,10 @@ class UserController {
 
         if (!is_valid.fails()) {
             try {
+                const json = require('../../Json/json');
+                data_user = json.set_update_json(data_user);
                 const user = await User.create(data_user);
-                const json_user = user.toJSON(); 
-                response.send({ status: true, message: 'Usuario registrado correctamente', user: json_user });
+                response.send({ status: true, message: 'Usuario registrado correctamente', table: 'tab_usuarios' });
             } catch (error) {
                 response.send({ status: false, message: `Error: ${error.code}` });
             }
@@ -71,16 +71,34 @@ class UserController {
             const json_user = user.toJSON();
             // If exist: 
             if (json_user.length > 0) {
-                const template = require('../../Template/modal');
-                const { update_usuario } = require('../../Template/rules');
-                const { tipo_roles } = require('../../data/data');
-                const html = template.create_modal_update('form_update_usuario', 'Modificar Usuario', json_user[0], tipo_roles);
-                response.send({ status: true, html: html, form: { id: 'form_update_usuario', rules: update_usuario, confirm: 'Esta seguro de actualizar el Usuario', url: '/usuario/update' } });
+                const { update_usuario } = require('../../Json/rules');
+                response.send({ status: true, data: json_user[0], form: { id: 'form_update_user', rules: update_usuario, confirm: 'Esta seguro de actualizar el Usuario', url: '/user/update' } });
             } else {
                 response.send({ status: false, message: 'Usuario no encontrado' });   
             }
         } catch (error) {
             response.send({ status: false, message: `Error: ${error.code}` });
+        }
+    }
+
+    async update_user({request, response}) {
+        let data = request.post();
+        data.is_active = (data.is_active === 'on') ? true : false;
+        const is_valid = await validate(data, rules_update_user, messages);
+
+        if (!is_valid.fails()) {
+            try {
+                const Hash = use('Hash');
+                const json = require('../../Json/json'); 
+                data.password = await Hash.make(data.password);
+                const update_data = json.set_update_json(data);
+                const update_redimir = await User.query().where('id', data.id).update(update_data);   
+                response.send({ status: true, message: 'Usuario actualizado correctamente', table: 'tab_usuarios' });
+            } catch (error) {
+                response.send({ status: false, message: `Error: ${error.code}` });
+            }
+        } else {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
         }
     }
 

@@ -3,7 +3,7 @@ const Bono = use('App/Models/Bono');
 const Compra = use('App/Models/Compra');
 
 const { validate } = use('Validator');
-const { rules_bono, rules_bono_update_saldo } = require('../../Validators/rules');
+const { rules_bono, rules_bono_update_saldo, rules_update_bono } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 const moment = require('moment');
@@ -18,7 +18,8 @@ class BonoController {
         };
         const user = await auth.getUser();
         const json_user = user.toJSON();
-        return view.render('bonos', {data_table: data_table, title: 'Listado de Bonos', user: json_user}); 
+        const { tipo_bonos } = require('../../data/data'); 
+        return view.render('bonos', {data_table: data_table, title: 'Listado de Bonos', user: json_user, tipo_bonos: tipo_bonos}); 
     }
 
     async gestion({view, auth}) {
@@ -169,15 +170,30 @@ class BonoController {
             const bono_json = bono.toJSON();
             // If exist's? 
             if (bono_json.length > 0) {
-                const template = require('../../Template/modal');
-                const { tipo_bonos } = require('../../data/data');
-                const html = template.create_modal_update('form_update_bono', 'Modificar Bono', bono_json[0], tipo_bonos);
-                const { update_bono } = require('../../Template/rules');
-                response.send({ status: true, html: html, form: { id: 'form_update_bono', rules: update_bono, confirm: 'Esta seguro de actualizar el Bono', url: '/bono/update' } });
+                const { update_bono } = require('../../Json/rules');
+                response.send({ status: true, data: bono_json[0], form: { id: 'form_update_bono', rules: update_bono, confirm: 'Esta seguro de actualizar el Bono', url: '/bono/update' } });
             } else {
                 response.send({ status: false, message: 'Bono no encontrado' });
             }
         } catch (error) {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
+        }
+    }
+
+    async update_bono({request, response}) {
+        const data = request.post();
+        const is_valid = await validate(data, rules_update_bono, messages);
+
+        if (!is_valid.fails()) {
+            try {
+                const json = require('../../Json/json'); 
+                const update_data = json.set_update_json(data);
+                const update_bono = await Bono.query().where('id', data.id).update(update_data);   
+                response.send({ status: true, message: 'Bono actualizado correctamente', table: 'tab_bonos' });
+            } catch (error) {
+                response.send({ status: false, message: `Error: ${error.code}` });
+            }
+        } else {
             response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
         }
     }

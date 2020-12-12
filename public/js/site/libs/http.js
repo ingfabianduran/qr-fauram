@@ -3,7 +3,8 @@ async function post(url, type, body) {
     const response = await fetch(url, {
         method: type, 
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.getElementsByName('_csrf')[0].value
         },
         body: JSON.stringify(body)
     }); 

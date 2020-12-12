@@ -1,7 +1,41 @@
 @layout('site')
 @section('content')
     @!component('components.data_table', data_table = data_table)
-    @!component('components.modal_update')
+    @component('components.modal_form', id_modal = 'modal_update', id_form = 'form_update_bono', title_modal = 'Actualizar Bono')
+        @slot('body')
+            {{ csrfField() }}
+            <input type="hidden" id="id" name="id">
+            <div class="form-group"> 
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo" class="form-control custom-select">
+                    <option value="" selected="selected">Tipo de bono</option>
+                    @each(tipo in tipo_bonos)
+                        <option value="{{tipo.value}}">{{tipo.text}}</option>
+                    @endeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="contenido">Contenido:</label>
+                <input type="text" class="form-control" id="contenido" name="contenido" placeholder="Contenido del bono">
+            </div>
+            <div class="form-group">
+                <label for="quien_redime">Quien redime:</label>
+                <input type="text" class="form-control" id="quien_redime" name="quien_redime" placeholder="Nombre de quien redime">
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="text" class="form-control" id="correo" name="correo" placeholder="Correo de destino">
+            </div>
+            <div class="form-group">
+                <label for="saldo">Saldo:</label>
+                <input type="text" class="form-control" id="saldo" name="saldo" placeholder="Valor del bono">
+            </div>
+            <div class="form-group">
+                <label for="cliente_id">Codigo del cliente:</label>
+                <input type="text" class="form-control" id="cliente_id" name="cliente_id" placeholder="Codigo del cliente">
+            </div>
+        @endslot
+    @endcomponent
     {{--Js by this view--}}
     {{script('/js/libs/pdfmake.min.js')}}
     {{script('/js/libs/vfs_fonts.min.js')}}

@@ -1,7 +1,29 @@
 @layout('site')
 @section('content')
     @!component('components.data_table', data_table = data_table)
-    @!component('components.modal_update')
+    @component('components.modal_form', id_modal = 'modal_update', id_form = 'form_update_compra', title_modal = 'Actualizar Compra')
+        @slot('body')
+            {{ csrfField() }}
+            <input type="hidden" id="id" name="id">
+            <div class="form-group"> 
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo" class="form-control custom-select">
+                    <option value="" selected="selected">Tipo de bono</option>
+                    @each(tipo in tipo_compras)
+                        <option value="{{tipo.value}}">{{tipo.text}}</option>
+                    @endeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor:</label>
+                <input type="text" class="form-control" id="valor" name="valor" placeholder="Valor de la compra">
+            </div>
+            <div class="form-group">
+                <label for="cliente_id">Valor:</label>
+                <input type="text" class="form-control" id="cliente_id" name="cliente_id" placeholder="Codigo del cliente">
+            </div>
+        @endslot
+    @endcomponent
     {{--Js by this view--}}
     {{script('/js/site/compras.js')}}
     {{script('/js/libs/datatables.min.js')}}     

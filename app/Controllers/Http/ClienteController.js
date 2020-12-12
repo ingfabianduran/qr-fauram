@@ -2,11 +2,11 @@
 const Cliente = use('App/Models/Cliente');
 
 const { validate } = use('Validator');
-const { rules_cliente } = require('../../Validators/rules');
+const { rules_cliente, rules_update_cliente } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 class ClienteController {
-    index({view}) {
+    async index({view, auth}) {
         const data_table = {
             titulo: 'Listado de Clientes',
             id: 'tab_clientes',
@@ -34,10 +34,12 @@ class ClienteController {
     }
 
     async add_cliente({request, response}) {
-        const data_cliente = request.post();
+        let data_cliente = request.post();
         const is_valid = await validate(data_cliente, rules_cliente, messages);
         if (!is_valid.fails()) {
             try {
+                const json = require('../../Json/json');
+                data_cliente = json.set_update_json(data_cliente);
                 const cliente = await Cliente.create(data_cliente);
                 const json_cliente = cliente.toJSON();
                 response.send({ status: true, message: 'Cliente registrado correctamente', cliente: json_cliente });
@@ -66,15 +68,31 @@ class ClienteController {
             const json_cliente = cliente.toJSON();
             // If exist: 
             if (json_cliente.length > 0) {
-                const template = require('../../Template/modal');
-                const { update_cliente } = require('../../Template/rules');
-                const html = template.create_modal_update('form_update_cliente', 'Modificar Cliente', json_cliente[0]);
-                response.send({ status: true, html: html, form: { id: 'form_update_cliente', rules: update_cliente, confirm: 'Esta seguro de actualizar el Cliente', url: '/cliente/update' } });
+                const { update_cliente } = require('../../Json/rules');
+                response.send({ status: true, data: json_cliente[0], form: { id: 'form_update_cliente', rules: update_cliente, confirm: 'Esta seguro de actualizar el Cliente', url: '/cliente/update' } });
             } else {
                 response.send({ status: false, message: 'Cliente no encontrado' });   
             }
         } catch (error) {
             response.send({ status: false, message: `Error: ${error.code}` });
+        }
+    }
+
+    async update_cliente({request, response}) {
+        const data = request.post();
+        const is_valid = await validate(data, rules_update_cliente, messages);
+
+        if (!is_valid.fails()) {
+            try {
+                const json = require('../../Json/json'); 
+                const update_data = json.set_update_json(data);
+                const update_cliente = await Cliente.query().where('id', data.id).update(update_data);   
+                response.send({ status: true, message: 'Cliente actualizado correctamente', table: 'tab_clientes' });
+            } catch (error) {
+                response.send({ status: false, message: `Error: ${error.code}` });
+            }
+        } else {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
         }
     }
 }

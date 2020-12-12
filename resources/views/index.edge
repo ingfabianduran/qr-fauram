@@ -20,6 +20,7 @@
                 <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 <form id="form_session">
+                    {{ csrfField() }}
                     <div class="input-group mb-3">
                         <input type="email" id="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
@@ -39,6 +40,13 @@
                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                     <a href="/" class="btn btn-danger btn-block">Cancelar</a>
                 </form>
+                @if(getErrorFor('session'))
+                    <div class="alert alert-warning alert-dismissible mt-2">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-exclamation-triangle"></i>Ops!!!</h5>
+                        {{getErrorFor('session')}}
+                    </div>
+                @endif 
             </div>
         </div>
         {{--Js by this view--}}

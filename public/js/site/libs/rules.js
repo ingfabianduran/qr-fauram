@@ -90,7 +90,34 @@ function get_rules() {
             password: {
                 required: true
             }
-        }
+        },
+        nuevo_usuario: {
+            nombre: {
+                required: true,
+                rangelength: [3, 45]
+            },
+            apellido: {
+                required: true,
+                rangelength: [3, 45]
+            },
+            rol: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true,
+                rangelength: [8, 80]
+            },
+            password: {
+                required: true,
+                rangelength: [8, 60]
+            },
+            password_confirmation: {
+                required: true,
+                rangelength: [8, 60],
+                equalTo: '#password'
+            }
+        },
     };
     return rules;
 }

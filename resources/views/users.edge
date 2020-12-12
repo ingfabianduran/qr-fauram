@@ -1,7 +1,45 @@
 @layout('site')
 @section('content')
     @!component('components.data_table', data_table = data_table)
-    @!component('components.modal_update')
+    @component('components.modal_form', id_modal = 'modal_update', id_form = 'form_update_user', title_modal = 'Actualizar Usuario')
+        @slot('body')
+            {{ csrfField() }}
+            <input type="hidden" id="id" name="id">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del usuario">
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido del usuario">
+            </div>
+            <div class="form-group">
+                <label for="rol">Rol:</label>
+                <select id="rol" name="rol" class="form-control custom-select">
+                    <option value="" selected="selected">Tipo de rol</option>
+                    @each(tipo in tipo_roles)
+                        <option value="{{tipo.value}}">{{tipo.text}}</option>
+                    @endeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo:</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Correo del usuario">
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña del usuario">
+            </div>
+            <div class="form-group">
+                <label for="password_confirmation">Confirmar:</label>
+                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirmar contraseña">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="is_active" name="is_active" checked>
+                <label class="form-check-label" for="is_active">Esta activo</label>
+            </div>
+        @endslot
+    @endcomponent
     {{--Js by this view--}}
     {{script('/js/site/users.js')}}
     {{script('/js/libs/datatables.min.js')}}     

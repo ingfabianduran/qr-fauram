@@ -35,13 +35,8 @@ const rules = {
             required: true
         },
         quien_redime: {
-            rangelength: [3, 45],
-            required: {
-                depends: function(element) {
-                    if ($('#tipo').val() === 'Regalo') return true;
-                    else return false;
-                }
-            },
+            required: true,
+            rangelength: [3, 80]
         },
         correo: {
             email: true,
@@ -94,33 +89,6 @@ const rules = {
             digits: true
         }
     },
-    nuevo_usuario: {
-        nombre: {
-            required: true,
-            rangelength: [3, 45]
-        },
-        apellido: {
-            required: true,
-            rangelength: [3, 45]
-        },
-        rol: {
-            required: true
-        },
-        email: {
-            required: true,
-            email: true,
-            rangelength: [8, 45]
-        },
-        password: {
-            required: true,
-            rangelength: [8, 60]
-        },
-        confirm_password: {
-            required: true,
-            rangelength: [8, 60],
-            equalTo: '#password'
-        }
-    },
     update_usuario: {
         id: {
             required: true,
@@ -140,7 +108,7 @@ const rules = {
         email: {
             required: true,
             email: true,
-            rangelength: [8, 45]
+            rangelength: [8, 80]
         },
         password: {
             required: true,

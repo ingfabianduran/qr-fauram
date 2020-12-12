@@ -4,11 +4,11 @@ const Redimir = use('App/Models/Redimido');
 const Bono = use('App/Models/Bono');
 
 const { validate } = use('Validator');
-const { rules_bono_redimir } = require('../../Validators/rules');
+const { rules_bono_redimir, rules_update_redimir } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 class RedimidoController {
-    index({view}) {
+    async index({view, auth}) {
         const data_table = {
             titulo: 'Listado de redimidos',
             id: 'tab_redimidos',
@@ -61,14 +61,30 @@ class RedimidoController {
             const redimido_json = redimido.toJSON();
             // If exist's? 
             if (redimido_json.length > 0) {
-                const template = require('../../Template/modal');
-                const html = template.create_modal_update('form_update_redimido', 'Modificar Redimido', redimido_json[0]);
-                const { update_redimir } = require('../../Template/rules');
-                response.send({ status: true, html: html, form: { id: 'form_update_redimido', rules: update_redimir, confirm: 'Esta seguro de actualizar el Redimido', url: '/redimir/update' } });
+                const { update_redimir } = require('../../Json/rules');
+                response.send({ status: true, data: redimido_json[0], form: { id: 'form_update_redimido', rules: update_redimir, confirm: 'Esta seguro de actualizar el Redimido', url: '/redimir/update' } });
             } else {
                 response.send({ status: false, message: 'Compra no encontrada' });
             }
         } catch (error) {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
+        }
+    }
+
+    async update_redimido({request, response}) {
+        const data = request.post();
+        const is_valid = await validate(data, rules_update_redimir, messages);
+
+        if (!is_valid.fails()) {
+            try {
+                const json = require('../../Json/json'); 
+                const update_data = json.set_update_json(data);
+                const update_redimir = await Redimir.query().where('id', data.id).update(update_data);   
+                response.send({ status: true, message: 'Redimido actualizado correctamente', table: 'tab_redimidos' });
+            } catch (error) {
+                response.send({ status: false, message: `Error: ${error.code}` });
+            }
+        } else {
             response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
         }
     }

@@ -1,7 +1,32 @@
 @layout('site')
 @section('content')
     @!component('components.data_table', data_table = data_table)
-    @!component('components.modal_update')
+    @component('components.modal_form', id_modal = 'modal_update', id_form = 'form_update_cliente', title_modal = 'Actualizar Cliente')
+        @slot('body')
+            {{ csrfField() }}
+            <input type="hidden" id="id" name="id">
+            <div class="form-group">
+                <label for="identificacion">Identificación:</label>
+                <input type="text" class="form-control" id="identificacion" name="identificacion" placeholder="Identificación del cliente">
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del cliente">
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido del cliente">
+            </div>
+            <div class="form-group">
+                <label for="contacto">Contacto:</label>
+                <input type="text" class="form-control" id="contacto" name="contacto" placeholder="Contacto del cliente">
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="text" class="form-control" id="correo" name="correo" placeholder="Correo del cliente">
+            </div>
+        @endslot
+    @endcomponent
     {{--Js by this view--}}
     {{script('/js/site/clientes.js')}}
     {{script('/js/libs/datatables.min.js')}}     

@@ -71,7 +71,7 @@ function update_data(id_form, rules, message_confirm, url) {
             show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Actualizar', (confirm) => {
                 if (confirm) {
                     const data = serializarForm(id_form);
-                    const response = post(url, 'PUT', data); 
+                    const response = post(url, 'PUT', data, id_form); 
                     load_preloader_container(id_form, 10); 
                     response.then((res) => {
                         stop_preloader(id_form, 500);

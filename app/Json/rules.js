@@ -118,6 +118,9 @@ const rules = {
             required: true,
             rangelength: [8, 60],
             equalTo: '#password'
+        }, 
+        is_active: {
+            required: true
         }
     }
 }

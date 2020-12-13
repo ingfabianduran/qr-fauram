@@ -24,15 +24,15 @@ class UserController {
         };
         const user = await auth.getUser();
         const json_user = user.toJSON();
-        const { tipo_roles } = require('../../data/data');
-        return view.render('users', {data_table: data_table, title: 'Listado de Usuarios', user: json_user, tipo_roles: tipo_roles});
+        const { tipo_roles, tipo_estados } = require('../../data/data');
+        return view.render('users', {data_table: data_table, title: 'Listado de Usuarios', user: json_user, tipo_roles: tipo_roles, tipo_estados: tipo_estados});
     }
 
     async view_form_new_user({view, auth}) {
         const user = await auth.getUser();
         const json_user = user.toJSON();
-        const { tipo_roles } = require('../../data/data');
-        return view.render('add_user', {tipo_roles: tipo_roles, user: json_user});
+        const { tipo_roles, tipo_estados } = require('../../data/data');
+        return view.render('add_user', {tipo_roles: tipo_roles, tipo_estados: tipo_estados, user: json_user});
     }
 
     async list_users({response}) {
@@ -47,7 +47,6 @@ class UserController {
 
     async add_user({request, response}) {
         let data_user = request.post();
-        data_user.is_active = (data_user.is_active === 'on') ? true : false;
         const is_valid = await validate(data_user, rules_user, messages);
 
         if (!is_valid.fails()) {
@@ -68,7 +67,7 @@ class UserController {
         const id = request.params.id || 0;
         try {
             const user = await User.query().where('id', id).fetch();
-            const json_user = user.toJSON();
+            let json_user = user.toJSON();
             // If exist: 
             if (json_user.length > 0) {
                 const { update_usuario } = require('../../Json/rules');
@@ -83,7 +82,6 @@ class UserController {
 
     async update_user({request, response}) {
         let data = request.post();
-        data.is_active = (data.is_active === 'on') ? true : false;
         const is_valid = await validate(data, rules_update_user, messages);
 
         if (!is_valid.fails()) {

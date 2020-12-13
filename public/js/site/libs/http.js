@@ -1,10 +1,10 @@
 // Http post and put: 
-async function post(url, type, body) {
+async function post(url, type, body, id_form) {
     const response = await fetch(url, {
         method: type, 
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.getElementsByName('_csrf')[0].value
+            'X-CSRF-TOKEN': $(`#${id_form} :input[name='_csrf']`)
         },
         body: JSON.stringify(body)
     }); 

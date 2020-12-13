@@ -22,7 +22,7 @@ $(document).ready(function() {
 });
 // Event lost focus in input identificacion: 
 function get_data_search_cliente() {
-    const input_identificacion = document.getElementById('form_add_cliente')[0]; 
+    const input_identificacion = document.getElementById('form_add_cliente')[1]; 
     input_identificacion.addEventListener('focusout', () => {
         const url = `/cliente/search/${input_identificacion.value}`;
         const cliente = get(url, 'GET');
@@ -46,7 +46,7 @@ function validate_form_cliente(id_form, rules, message_confirm, url) {
             show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Registrar', function(confirm) {
                 if (confirm) {
                     const data = serializarForm(id_form);
-                    const response = post(url, 'POST', data);
+                    const response = post(url, 'POST', data, id_form);
                     response.then((res) => {
                         if (res.status) {
                             set_data_cliente(res.cliente);
@@ -71,7 +71,7 @@ function validate_form_add_bono(id_form, rules, message_confirm, url) {
                 if (confirm) {
                     load_preloader_container(id_form, 30);
                     const data = serializarForm(id_form);
-                    const response = post(url, 'POST', data);
+                    const response = post(url, 'POST', data, id_form);
                     response.then((res) => {
                         if (res.status) {
                             show_alert('Enhorabuena!!!', res.message, 'success');
@@ -117,7 +117,7 @@ function validate_form_recargar_bono(id_form, rules, message_confirm, url) {
             show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Recargar', function(confirm) {
                 if (confirm) {
                     const data = serializarForm(id_form);
-                    const response = post(url, 'PUT', data);
+                    const response = post(url, 'PUT', data, id_form);
                     load_preloader_container(id_form, 10);
                     response.then((res) => {
                         if (res.status) {
@@ -147,13 +147,17 @@ function validate_form_redimir_bono(id_form, rules, message_confirm, url) {
             show_alert_confirm('Esta seguro???', message_confirm, 'question', 'Redimir', function(confirm) {
                 if (confirm) {
                     const data = serializarForm(id_form);
-                    const response = post(url, 'POST', data);
+                    const response = post(url, 'POST', data, id_form);
                     load_preloader_container(id_form, 10);
                     response.then((res) => {
-                        if (res.status) show_alert('Enhorabuena!!!', res.message, 'success');
-                        else toastr.error(res.message);
+                        if (res.status) {
+                            show_alert('Enhorabuena!!!', res.message, 'success');
+                            $('#modal_add_redimir').modal('hide');
+                        } else {
+                            toastr.error(res.message);
+                        }
                         stop_preloader(id_form, 100);
-                        $('#modal_add_redimir').modal('hide');
+                        
                     }).catch((err) => {
                         stop_preloader(id_form, 100);
                         show_alert('Ops!!!', err.message, 'error');

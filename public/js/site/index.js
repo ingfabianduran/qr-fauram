@@ -7,7 +7,7 @@ function validate_form_sesion(id_form, rules, url) {
         rules: rules,
         submitHandler: function() {
             const data = serializarForm(id_form);
-            const response = post(url, 'POST', data);
+            const response = post(url, 'POST', data, id_form);
             load_preloader_container(id_form, 20);
             response.then((res) => {
                 if (res.status) {
@@ -17,6 +17,7 @@ function validate_form_sesion(id_form, rules, url) {
                         location.href = '/bono/gestion';
                     }, 1500);
                 } else {
+                    stop_preloader(id_form, 500);
                     toastr.error(res.message);
                 }
             });

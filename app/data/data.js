@@ -12,6 +12,10 @@ const data = {
         { value: 'admin', text: 'Admin' },
         { value: 'standard', text: 'Standard' },
     ],
+    tipo_estados: [
+        { value: '1', text: 'Activo' },
+        { value: '0', text: 'Deshabilitado' },
+    ],
 }
 
 module.exports = data;

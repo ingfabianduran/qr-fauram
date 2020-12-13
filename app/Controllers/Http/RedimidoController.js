@@ -20,14 +20,16 @@ class RedimidoController {
     }
 
     async redimir_bono({request, response}) {
-        const data_redimido = request.post(); 
+        let data_redimido = request.post(); 
         const is_valid = await validate(data_redimido, rules_bono_redimir, messages); 
         if (!is_valid.fails()) {
             try {
+                const json = require('../../Json/json'); 
+                data_redimido = json.set_update_json(data_redimido);
                 // Valid if bono have saldo: 
                 let bono = await Bono.query().where('id', data_redimido.bono_id).fetch();
                 const json_bono = bono.toJSON();
-                if (parseInt(json_bono[0].saldo) > parseInt(data_redimido.valor)) {
+                if (parseInt(json_bono[0].saldo) >= parseInt(data_redimido.valor)) {
                     const new_saldo_bono = parseInt(json_bono[0].saldo) - parseInt(data_redimido.valor);
                     bono = await Bono.query().where('id', data_redimido.bono_id).update({'saldo': new_saldo_bono});
                     // New redimir: 

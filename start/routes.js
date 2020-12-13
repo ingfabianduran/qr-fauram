@@ -63,6 +63,7 @@ Route.group(() => {
     Route.get('search/update/:id', 'UserController.search_user_by_id');
     Route.get('logout', 'UserController.logout');
     Route.get('add', 'UserController.view_form_new_user');
+    Route.post('/login', 'UserController.logIn');
     Route.post('add', 'UserController.add_user');
     Route.put('update', 'UserController.update_user');
 }).prefix('/user/').middleware('auth');

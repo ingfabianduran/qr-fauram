@@ -18,6 +18,7 @@ const Route = use('Route')
 
 Route.get('', 'UserController.index');
 Route.post('/user/login', 'UserController.logIn');
+Route.post('/bono/email', 'BonoController.send_email_bono');
 
 Route.group(() => {
     Route.get('', 'BonoController.index');

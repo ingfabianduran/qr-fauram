@@ -1,6 +1,7 @@
 'use strict'
 const Bono = use('App/Models/Bono');
 const Compra = use('App/Models/Compra');
+const Mail = use('Mail')
 
 const { validate } = use('Validator');
 const { rules_bono, rules_bono_update_saldo, rules_update_bono, rules_delete } = require('../../Validators/rules');
@@ -212,6 +213,19 @@ class BonoController {
         } else {
             response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
         }
+    }
+
+    async send_email_bono() {
+        const data = {};
+
+        await Mail.send('components.email', data, (message) => {
+            message
+              .to('feduran2@misena.edu.co')
+              .from('ingfabianavellaneda@gmail.com')
+              .subject('Welcome to yardstick')
+          })
+      
+          return 'Registered successfully'
     }
 }
 

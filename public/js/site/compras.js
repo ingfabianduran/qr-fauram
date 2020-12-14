@@ -1,6 +1,6 @@
 $(document).ready(function() {
     data_table_compra();
-    view_delete_confirm('tab_compras', 'Desea eliminar una Compra', '/compra/delete/');
+    view_delete_confirm('tab_compras', 'form_delete_compra', get_rules().delete, '/compra/delete/');
     view_update_modal('tab_compras', '/compra/search/update/');
 });
 // Create table by compra: 
@@ -16,7 +16,7 @@ function data_table_compra() {
         { 
             data: null,
             render: (item) => {
-                return `${item.clientes.nombre} ${item.clientes.apellido}`;
+                return (item.cliente_id === null) ? 'No Registra' : `${item.clientes.nombre} ${item.clientes.apellido}`
             }
         },
         { data: 'created_at' },

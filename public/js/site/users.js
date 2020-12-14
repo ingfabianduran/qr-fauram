@@ -1,6 +1,6 @@
 $(document).ready(function() {
     data_table_user(); 
-    view_delete_confirm('tab_usuarios', 'Desea eliminar un Usuario', '/user/delete/');
+    view_delete_confirm('tab_usuarios', 'form_delete_user', get_rules().delete, '/user/delete/');
     view_update_modal('tab_usuarios', '/user/search/update/');
 });
 // Create table by user:

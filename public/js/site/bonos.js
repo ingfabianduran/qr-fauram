@@ -1,6 +1,6 @@
 $(document).ready(function() {
     data_table_bono();
-    view_delete_confirm('tab_bonos', 'Desea eliminar un Bono', '/bono/delete/');
+    view_delete_confirm('tab_bonos', 'form_delete_bono', get_rules().delete, '/bono/delete/');
     view_update_modal('tab_bonos', '/bono/search/update/');
     print_bono_pdf('tab_bonos');
 });
@@ -23,13 +23,13 @@ function data_table_bono() {
         {
             data: null,
             render: (item) => {
-                return item.clientes.identificacion;
+                return (item.cliente_id === null) ? 'No Registra' : item.clientes.identificacion;
             } 
         },
         {
             data: null,
             render: (item) => {
-                return `${item.clientes.nombre} ${item.clientes.apellido}`;
+                return (item.cliente_id === null) ? 'No Registra' : `${item.clientes.nombre} ${item.clientes.apellido}`;
             }
         },
         { 

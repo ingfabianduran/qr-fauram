@@ -30,6 +30,7 @@ Route.group(() => {
     Route.post('add', 'BonoController.validate_bono');
     Route.put('recargar', 'BonoController.recargar_bono');
     Route.put('update', 'BonoController.update_bono');
+    Route.delete('delete', 'BonoController.delete_bono');
 }).prefix('/bono/').middleware('auth');
 
 Route.group(() => {
@@ -39,6 +40,7 @@ Route.group(() => {
     Route.get('search/update/:id', 'ClienteController.search_cliente_by_id');
     Route.post('add', 'ClienteController.add_cliente');
     Route.put('update', 'ClienteController.update_cliente');
+    Route.delete('delete', 'ClienteController.delete_cliente');
 }).prefix('/cliente/').middleware('auth');
 
 Route.group(() => {
@@ -47,6 +49,7 @@ Route.group(() => {
     Route.get('search/update/:id', 'RedimidoController.search_redimido_by_id');
     Route.post('add', 'RedimidoController.redimir_bono');
     Route.put('update', 'RedimidoController.update_redimido');
+    Route.delete('delete', 'RedimidoController.delete_redimido');
 }).prefix('/redimir/').middleware('auth');
 
 Route.group(() => {
@@ -54,6 +57,7 @@ Route.group(() => {
     Route.get('list', 'CompraController.list_compras');
     Route.get('search/update/:id', 'CompraController.search_compra_by_id');
     Route.put('update', 'CompraController.update_compra');
+    Route.delete('delete', 'CompraController.delete_compra');
 }).prefix('/compra/').middleware('auth');
 
 Route.group(() => {
@@ -66,4 +70,5 @@ Route.group(() => {
     Route.post('/login', 'UserController.logIn');
     Route.post('add', 'UserController.add_user');
     Route.put('update', 'UserController.update_user');
+    Route.delete('delete', 'UserController.delete_user');
 }).prefix('/user/').middleware('auth');

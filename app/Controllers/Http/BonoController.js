@@ -3,7 +3,7 @@ const Bono = use('App/Models/Bono');
 const Compra = use('App/Models/Compra');
 
 const { validate } = use('Validator');
-const { rules_bono, rules_bono_update_saldo, rules_update_bono } = require('../../Validators/rules');
+const { rules_bono, rules_bono_update_saldo, rules_update_bono, rules_delete } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 const moment = require('moment');
@@ -190,6 +190,22 @@ class BonoController {
                 const update_data = json.set_update_json(data);
                 const update_bono = await Bono.query().where('id', data.id).update(update_data);   
                 response.send({ status: true, message: 'Bono actualizado correctamente', table: 'tab_bonos' });
+            } catch (error) {
+                response.send({ status: false, message: `Error: ${error.code}` });
+            }
+        } else {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
+        }
+    }
+
+    async delete_bono({request, response}) {
+        const data = request.post();
+        const is_valid = await validate(data, rules_delete, messages);
+
+        if (!is_valid.fails()) {
+            try {
+                const delete_bono = await Bono.query().where('id', data.id_delete).delete();
+                response.send({ status: true, message: 'Bono eliminado correctamente', table: 'tab_bonos' });
             } catch (error) {
                 response.send({ status: false, message: `Error: ${error.code}` });
             }

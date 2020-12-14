@@ -1,7 +1,7 @@
 @layout('site')
 @section('content')
     @!component('components.data_table', data_table = data_table)
-    @component('components.modal_form', id_modal = 'modal_update', id_form = 'form_update_compra', title_modal = 'Actualizar Compra')
+    @component('components.modal_form', id_modal = 'modal_update', id_form = 'form_update_compra', title_modal = 'Actualizar Compra', class_modal = 'bg-info', type_modal = 'modal-lg', text_btn = 'Actualizar')
         @slot('body')
             {{ csrfField() }}
             <input type="hidden" id="id" name="id">
@@ -22,6 +22,13 @@
                 <label for="cliente_id">Valor:</label>
                 <input type="text" class="form-control" id="cliente_id" name="cliente_id" placeholder="Codigo del cliente">
             </div>
+        @endslot
+    @endcomponent
+    @component('components.modal_form', id_modal = 'modal_delete', class_modal = 'bg-danger', type_modal = 'modal-sm', id_form = 'form_delete_compra', title_modal = 'Eliminar Compra', text_btn = 'Eliminar')
+        @slot('body')
+            <h6>¿Desea eliminar la compra seleccionada?</h6>
+            {{ csrfField() }}
+            <input type="hidden" id="id_delete" name="id_delete">
         @endslot
     @endcomponent
     {{--Js by this view--}}

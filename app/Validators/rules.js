@@ -74,6 +74,9 @@ const rules = {
         email: 'email|min:8|max:45',
         password: 'required|min:8|max:60|confirmed',
         password_confirmation: 'required|min:8|max:60'
+    },
+    rules_delete: {
+        id_delete: 'required|integer'
     }
 };
 

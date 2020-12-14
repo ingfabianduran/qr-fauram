@@ -12,7 +12,7 @@ class RedimidosSchema extends Schema {
       table.decimal('valor').notNullable()
       table.string('contacto', 10)
       table.integer('n_factura').notNullable()
-      table.integer('bono_id').unsigned().references('id').inTable('bonos').notNullable()
+      table.integer('bono_id').unsigned().references('id').inTable('bonos').onUpdate('CASCADE').onDelete('SET NULL')
       table.timestamps()
     })
   }

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     data_table_redimido();
-    view_delete_confirm('tab_redimidos', 'Desea eliminar un Redimido', '/redimir/delete/');
+    view_delete_confirm('tab_redimidos', 'form_delete_redimido', get_rules().delete, '/redimir/delete/');
     view_update_modal('tab_redimidos', '/redimir/search/update/');
 });
 // Create table by redimido: 

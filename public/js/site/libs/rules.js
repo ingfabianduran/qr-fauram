@@ -121,6 +121,12 @@ function get_rules() {
                 required: true
             }
         },
+        delete: {
+            id: {
+                required: true,
+                digits: true
+            }
+        }
     };
     return rules;
 }

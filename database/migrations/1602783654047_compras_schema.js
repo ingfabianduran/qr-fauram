@@ -9,7 +9,7 @@ class ComprasSchema extends Schema {
       table.increments()
       table.enu('tipo', ['Regalo', 'Recarga', 'Recarga valor']).notNullable()
       table.decimal('valor').notNullable()
-      table.integer('cliente_id').unsigned().references('id').inTable('clientes').notNullable()
+      table.integer('cliente_id').unsigned().references('id').inTable('clientes').onUpdate('CASCADE').onDelete('SET NULL')
       table.timestamps()
     })
   }

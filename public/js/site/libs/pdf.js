@@ -16,6 +16,10 @@ function content_pdf_recarga(data, mi_mensaje) {
                 style: 'body'
             },
             {
+                text: `$ ${data.bono[0].saldo}`,
+                style: 'valor'
+            },
+            {
                 image: `${ data.qr }`,
                 style: 'qr'
             },
@@ -44,6 +48,10 @@ function content_pdf_regalo(data, mi_mensaje) {
             {
                 text: mensaje, 
                 style: 'body'
+            },
+            {
+                text: `$ ${data.bono[0].saldo}`,
+                style: 'valor'
             },
             {
                 image: `${ data.qr }`,
@@ -78,6 +86,13 @@ function get_styles() {
             margin: [20, 5, 20, 0],
             font: 'BarlowCondensed'
         },
+        valor: {
+            font: 'BarlowCondensed',
+            bold: true,
+            fontSize: 30,
+            alignment: 'right',
+            margin: [0, 20, 20, 0],
+        },
         qr: {
             alignment: 'center',
             margin: [0, 60, 0, 0],
@@ -85,7 +100,7 @@ function get_styles() {
         footer: {
             fontSize: 15,
             alignment: 'center',
-            margin: [0, 180, 0, 0],
+            margin: [0, 140, 0, 0],
             font: 'BarlowCondensed'
         }
     };

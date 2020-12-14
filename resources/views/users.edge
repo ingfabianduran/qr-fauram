@@ -1,7 +1,7 @@
 @layout('site')
 @section('content')
     @!component('components.data_table', data_table = data_table)
-    @component('components.modal_form', id_modal = 'modal_update', id_form = 'form_update_user', title_modal = 'Actualizar Usuario')
+    @component('components.modal_form', id_modal = 'modal_update', class_modal = 'bg-info', type_modal = 'modal-lg', id_form = 'form_update_user', title_modal = 'Actualizar Usuario', text_btn = 'Actualizar')
         @slot('body')
             {{ csrfField() }}
             <input type="hidden" id="id" name="id">
@@ -43,6 +43,13 @@
                     @endeach
                 </select>
             </div>
+        @endslot
+    @endcomponent
+    @component('components.modal_form', id_modal = 'modal_delete', class_modal = 'bg-danger', type_modal = 'modal-sm', id_form = 'form_delete_user', title_modal = 'Eliminar Usuario', text_btn = 'Eliminar')
+        @slot('body')
+            <h6>¿Desea eliminar el usuario seleccionado?</h6>
+            {{ csrfField() }}
+            <input type="hidden" id="id_delete" name="id_delete">
         @endslot
     @endcomponent
     {{--Js by this view--}}

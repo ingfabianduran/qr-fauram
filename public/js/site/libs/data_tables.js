@@ -32,17 +32,31 @@ function create_buttons_gestion(item) {
     return render_button;
 }
 // Create event button delete: 
-function view_delete_confirm(id_table, message, url) {
+function view_delete_confirm(id_table, id_form, rules, url) {
     $(`#${id_table} tbody`).on('click', '.btn-danger', function() {
         const id = $(this).data('id');
-        show_alert_confirm('Esta seguro???', message, 'warning', 'Eliminar', (confirm) => {
-            if (confirm) {
-                const response = get(`${url}${id}`, 'DELETE');
-                response.then((data) => {
-                    
+        $('#modal_delete').modal('show');
+        document.getElementById('id_delete').value = id;
+        $(`#${id_form}`).validate({
+            rules: rules,
+            ignore: '',
+            submitHandler: function() {
+                const data = serializarForm(id_form);
+                const response = post(url, 'DELETE', data, id_form);
+                load_preloader_container(id_form, 10);
+                response.then((res) => {
+                    stop_preloader(id_form, 500);
+                    $('#modal_delete').modal('hide');
+                    if (res.status) {
+                        show_alert('Enhorabuena!!!', res.message, 'success');
+                        $(`#${res.table}`).DataTable().ajax.reload();
+                    } else {
+                        show_alert('Ops!!!', res.message, 'error');
+                    }
                 }).catch((err) => {
-                    toastr.error(err.message);
-                }); 
+                    stop_preloader(id_form, 500);
+                    show_alert('Ops!!!', err.message, 'error');
+                });
             }
         });
     });

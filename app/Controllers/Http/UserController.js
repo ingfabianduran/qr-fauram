@@ -3,7 +3,7 @@
 const User = use('App/Models/User');
 
 const { validate } = use('Validator');
-const { rules_user, rules_update_user } = require('../../Validators/rules');
+const { rules_user, rules_update_user, rules_delete } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 class UserController {
@@ -100,14 +100,40 @@ class UserController {
         }
     }
 
+    async delete_user({request, response}) {
+        const data = request.post();
+        const is_valid = await validate(data, rules_delete, messages);
+
+        if (!is_valid.fails()) {
+            try {
+                const delete_user = await User.query().where('id', data.id_delete).delete();
+                response.send({ status: true, message: 'Usuario eliminado correctamente', table: 'tab_usuarios' });
+            } catch (error) {
+                response.send({ status: false, message: `Error: ${error.code}` });
+            }
+        } else {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
+        }
+    }
+
     async logIn({request, response, auth}) {
         const data_user = request.post();
-        
-        try {
-            const isValidSession = await auth.attempt(data_user.email, data_user.password);
-            response.send({ status: true, message: 'Bienvenido a QR Fauram' });
-        } catch (error) {
-            response.send({ status: false, message: 'Usuario o contraseña incorrecta' });
+        const user = await User.query().where('email', data_user.email).fetch();
+        const json_user = user.toJSON();
+        // If exist
+        if (json_user.length === 1) {
+            if (json_user[0].is_active) {
+                try {
+                    const isValidSession = await auth.attempt(data_user.email, data_user.password);
+                    response.send({ status: true, message: 'Bienvenido a QR Fauram' });
+                } catch (error) {
+                    response.send({ status: false, message: 'Usuario o contraseña incorrecta' });
+                }
+            } else {
+                response.send({ status: false, message: 'El usuario no esta activo en el sistema' });
+            }
+        } else {
+            response.send({ status: false, message: 'El usuario no esta registrado en el sistema' });
         }
     }
 

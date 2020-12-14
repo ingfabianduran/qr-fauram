@@ -2,7 +2,7 @@
 const Cliente = use('App/Models/Cliente');
 
 const { validate } = use('Validator');
-const { rules_cliente, rules_update_cliente } = require('../../Validators/rules');
+const { rules_cliente, rules_update_cliente, rules_delete } = require('../../Validators/rules');
 const { messages } = require('../../Validators/messages');
 
 class ClienteController {
@@ -88,6 +88,22 @@ class ClienteController {
                 const update_data = json.set_update_json(data);
                 const update_cliente = await Cliente.query().where('id', data.id).update(update_data);   
                 response.send({ status: true, message: 'Cliente actualizado correctamente', table: 'tab_clientes' });
+            } catch (error) {
+                response.send({ status: false, message: `Error: ${error.code}` });
+            }
+        } else {
+            response.send({ status: false, message: `Error: ${is_valid.messages()[0].message}` });
+        }
+    }
+
+    async delete_cliente({request, response}) {
+        const data = request.post();
+        const is_valid = await validate(data, rules_delete, messages);
+
+        if (!is_valid.fails()) {
+            try {
+                const delete_cliente = await Cliente.query().where('id', data.id_delete).delete();
+                response.send({ status: true, message: 'Cliente eliminado correctamente', table: 'tab_clientes' });
             } catch (error) {
                 response.send({ status: false, message: `Error: ${error.code}` });
             }

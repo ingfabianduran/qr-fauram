@@ -20,6 +20,9 @@ function validate_form_sesion(id_form, rules, url) {
                     stop_preloader(id_form, 500);
                     toastr.error(res.message);
                 }
+            }).catch((err) => {
+                stop_preloader(id_form, 500);
+                toastr.error(err.message);
             });
         }
     });

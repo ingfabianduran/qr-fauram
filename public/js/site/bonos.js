@@ -3,6 +3,7 @@ $(document).ready(function() {
     view_delete_confirm('tab_bonos', 'form_delete_bono', get_rules().delete, '/bono/delete/');
     view_update_modal('tab_bonos', '/bono/search/update/');
     print_bono_pdf('tab_bonos');
+    send_email_bono('tab_bonos');
 });
 // Create table by bono: 
 function data_table_bono() {
@@ -36,7 +37,8 @@ function data_table_bono() {
             data: null, 
             render: (item) => { 
                 return `<div class="text-center">
-                            <button data-id="${item.id}" type="button" class="btn btn-dark"><i class="fa fa-file-pdf"></i>  Print PDF</button>
+                            <button data-id="${item.id}" type="button" class="btn btn-dark"><i class="fa fa-file-pdf"></i></button>
+                            <button data-id="${item.id}" class="btn btn btn-warning"><i class="fa fa-envelope"></i></button>
                             <button data-id="${item.id}" type="button" class="btn btn-info"><i class="fa fa-pen"></i>  Update</button>
                             <button data-id="${item.id}" type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i>  Delete</button>
                         </div>`;

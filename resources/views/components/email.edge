@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Simple Transactional Email</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <style>
       /* -------------------------------------
           GLOBAL RESETS
@@ -70,7 +71,7 @@
       }
       .wrapper {
         box-sizing: border-box;
-        padding: 20px; 
+        padding: 60px; 
       }
       .content-block {
         padding-bottom: 10px;
@@ -298,10 +299,27 @@
           border-color: #34495e !important; 
         } 
       }
+      .bono {
+        font-weight: bold;
+        padding-bottom: 6em;
+        font-size: 2em;
+      }
+      .saludo {
+        font-weight: bold;
+        padding-bottom: 1em;
+        font-size: 2em;
+      }
+      .mensaje {
+        text-align: justify;
+      }
+      .saldo {
+        text-align: right;
+        font-weight: bold;
+        font-size: 2em;
+      }
     </style>
   </head>
-  <body class="">
-    <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+  <body class="content">
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -315,25 +333,17 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi there,</p>
-                        <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                          <tbody>
-                            <tr>
-                              <td align="left">
-                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                  <tbody>
-                                    <tr>
-                                      <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                        <p>Good luck! Hope it works.</p>
+                        <p class="bono">Bono de {{data.tipo}}</p>
+                        @if(data.tipo === 'Recarga')
+                          <p class="saludo">Hola {{data.clientes.nombre}} {{data.clientes.apellido}}</p>
+                          <p class="mensaje">Compraste un Codigo QR que puedes recargar. Ahora puedes usarlo como medio de pago en nuestras instalaciones.</p>
+                          <p class="saldo">$ {{data.saldo}}</p>
+                        @else
+                          <p>Hola {{data.quien_redime}}</p>
+                          <p class="mensaje">{{data.clientes.nombre}} {{data.clientes.apellido}} Quiere que vivas una experiencia maravillosa, te ha regalado un Bono con un codigo QR.</p>
+                          <p class="saldo">$ {{data.saldo}}</p>
+                        @endif
+                          <p class="mensaje">Por favor acercarse a nuestras tiendas mas cercanas para obtener y hacer uso del bono.</p>
                       </td>
                     </tr>
                   </table>
@@ -347,8 +357,11 @@
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
-                    <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
+                    <span class="apple-link">Franklin Ramos Salon</span>
+                    <br>
+                    <span class="apple-link">Cra 13 #77a-65 </span>
+                    <br>
+                    <span class="apple-link">3132859321 </span>
                   </td>
                 </tr>
                 <tr>

@@ -215,17 +215,28 @@ class BonoController {
         }
     }
 
-    async send_email_bono() {
-        const data = {};
+    async send_email_bono({request, response}) {
+        const id = request.post();
 
-        await Mail.send('components.email', data, (message) => {
-            message
-              .to('feduran2@misena.edu.co')
-              .from('ingfabianavellaneda@gmail.com')
-              .subject('Welcome to yardstick')
-          })
-      
-          return 'Registered successfully'
+        try {
+            const bono = await Bono.query().with('clientes').where({ 'id': id }).fetch();
+            const json_bono = bono.toJSON();
+            // If exist: 
+            if (json_bono.length === 1) {
+                const data = json_bono[0];
+                await Mail.send('components.email', {data}, (message) => {
+                    message
+                        .to('ingfabianavellaneda@gmail.com')
+                        .from('ingfabianavellaneda@gmail.com')
+                        .subject('Welcome to yardstick')
+                });
+                response.send({ status: true, message: 'El bono ha sido enviado correctamente' });
+            } else {
+                response.send({ status: false, message: 'El bono no existe en el sistema' });
+            }
+        } catch (error) {
+            response.send({ status: false, message: `Error: ${error.code}` });
+        }
     }
 }
 

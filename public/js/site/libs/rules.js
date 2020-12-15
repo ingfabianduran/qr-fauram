@@ -126,6 +126,19 @@ function get_rules() {
                 required: true,
                 digits: true
             }
+        },
+        send_email: {
+            id_bono: {
+                required: true,
+                digits: true
+            },
+            correo_confirmado: {
+                required: true,
+                email: true
+            },
+            mensaje: {
+                required: true
+            }
         }
     };
     return rules;

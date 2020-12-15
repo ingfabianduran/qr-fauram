@@ -79,6 +79,7 @@ function validate_form_add_bono(id_form, rules, message_confirm, url) {
                             document.getElementById('image_qr').src = res.data.qr;
                             reset_form_by_http(id_form);
                             print_bono(res.data.bono);
+                            send_email_bono(res.data.bono.id);
                         } else {
                             show_alert('Ops!!!', res.message, 'error');
                             stop_preloader(id_form, 100);
@@ -106,6 +107,14 @@ function print_bono(bono) {
                 }
             });
         }); 
+    });
+}
+// Send email when bono create:
+function send_email_bono(id_bono) {
+    const bt_enviar_correo = document.getElementById('bt_enviar_correo');
+    bt_enviar_correo.classList.remove('disabled');
+    bt_enviar_correo.addEventListener('click', (e) => {
+        create_email(id_bono);
     });
 }
 // validate form recargar bono:

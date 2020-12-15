@@ -43,10 +43,25 @@
             <input type="hidden" id="id_delete" name="id_delete">
         @endslot
     @endcomponent
+    @component('components.modal_form', id_modal = 'modal_send_email', id_form = 'form_send_email', title_modal = 'Enviar Correo', class_modal = 'bg-info', type_modal = 'modal-lg', text_btn = 'Enviar')
+        @slot('body')
+            {{ csrfField() }}
+            <input type="hidden" id="id_bono" name="id_bono">
+            <div class="form-group">
+                <label for="correo_confirmado">Confirmar correo:</label>
+                <input type="text" class="form-control" id="correo_confirmado" name="correo_confirmado" placeholder="Correo de destino">
+            </div>
+            <div class="form-group">
+                <label for="correo">Mensaje perzonalizado:</label>
+                <textarea id="mensaje" name="mensaje" class="form-control" aria-label="With textarea" placeholder="Si desea escribir un mensaje perzonalizado digitelo aquí"></textarea>
+            </div>
+        @endslot
+    @endcomponent
     {{--Js by this view--}}
     {{script('/js/libs/pdfmake.min.js')}}
     {{script('/js/libs/vfs_fonts.min.js')}}
     {{script('/js/site/libs/pdf.js')}}
+    {{script('/js/site/libs/email.js')}}
     {{script('/js/site/bonos.js')}}
     {{script('/js/libs/datatables.min.js')}}     
     {{script('/js/libs/dataTables.bootstrap4.min.js')}}  

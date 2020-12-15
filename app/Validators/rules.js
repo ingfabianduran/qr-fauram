@@ -77,7 +77,7 @@ const rules = {
     },
     rules_delete: {
         id_delete: 'required|integer'
-    }
+    },
 };
 
 module.exports = rules;

@@ -18,7 +18,6 @@ const Route = use('Route')
 
 Route.get('', 'UserController.index');
 Route.post('/user/login', 'UserController.logIn');
-Route.post('/bono/email', 'BonoController.send_email_bono');
 
 Route.group(() => {
     Route.get('', 'BonoController.index');
@@ -28,6 +27,7 @@ Route.group(() => {
     Route.get('search/redimir/:content', 'BonoController.search_bono_by_redimir');
     Route.get('list', 'BonoController.list_bonos');
     Route.get('search/update/:id', 'BonoController.search_bono_by_id');
+    Route.post('email', 'BonoController.send_email_bono');
     Route.post('add', 'BonoController.validate_bono');
     Route.put('recargar', 'BonoController.recargar_bono');
     Route.put('update', 'BonoController.update_bono');

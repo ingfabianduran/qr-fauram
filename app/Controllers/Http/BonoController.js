@@ -235,7 +235,7 @@ class BonoController {
                     await Mail.send('components.email', {data}, (message) => {
                         message
                             .to(`${data.correo}`)
-                            .from('ingfabianavellaneda@gmail.com')
+                            .from('test.duran.a@gmail.com')
                             .subject(`Bono de ${data.tipo}`)
                             .attach(Helpers.tmpPath('bono.pdf'))
                     });

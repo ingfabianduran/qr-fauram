@@ -217,7 +217,7 @@ class BonoController {
 
     async send_email_bono({request, response}) {
         const file = request.file('file', { types: ['pdf'], size: '1mb' });
-        const data = request.post();
+        const data_email = request.post();
         const Helpers = use('Helpers');
         // Upload and move to the server: 
         await file.move(Helpers.tmpPath(), {
@@ -227,14 +227,14 @@ class BonoController {
         // Validate if file is move: 
         if (file.moved()) {
             try {
-                const bono = await Bono.query().with('clientes').where({ 'id': data.id }).fetch();
+                const bono = await Bono.query().with('clientes').where({ 'id': data_email.id }).fetch();
                 const json_bono = bono.toJSON();
                 // If exist: 
                 if (json_bono.length === 1) {
                     const data = json_bono[0];
                     await Mail.send('components.email', {data}, (message) => {
                         message
-                            .to(`${data.correo}`)
+                            .to(`${data_email.correo}`)
                             .from('test.duran.a@gmail.com')
                             .subject(`Bono de ${data.tipo}`)
                             .attach(Helpers.tmpPath('bono.pdf'))

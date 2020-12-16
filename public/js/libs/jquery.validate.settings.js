@@ -14,6 +14,8 @@ jQuery.validator.setDefaults({
             element.parent('.form-group').append(error);
         } else if (element.parent('.input-group').length) {
             element.parent('.input-group').append(error);
+        } else if (element.parent('.custom-file').parent('.form-group').length) {
+            element.parent('.custom-file').parent('.form-group').append(error);
         } else if (element.hasClass('select2')) {     
             $(element).next().append(error);
         } else if (element.prop('type') === 'hidden') {

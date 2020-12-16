@@ -339,9 +339,9 @@
                           <p class="mensaje">Compraste un Codigo QR que puedes recargar. Ahora puedes usarlo como medio de pago en nuestras instalaciones.</p>
                           <p class="saldo">$ {{data.saldo}}</p>
                         @else
-                          <p>Hola {{data.quien_redime}}</p>
+                          <p class="saludo">Hola {{data.quien_redime}}</p>
                           <p class="mensaje">{{data.clientes.nombre}} {{data.clientes.apellido}} Quiere que vivas una experiencia maravillosa, te ha regalado un Bono con un codigo QR.</p>
-                          <p class="saldo">$ {{data.saldo}}</p>
+                          <p class="saldo">Saldo: $ {{data.saldo}}</p>
                         @endif
                           <p class="mensaje">Por favor acercarse a nuestras tiendas mas cercanas para obtener y hacer uso del bono.</p>
                       </td>

@@ -17,7 +17,7 @@ $(document).ready(function() {
     validate_form_redimir_bono('form_add_redimir', get_rules().bono_redimir, '¿Desea redimir el bono?', '/redimir/add');
     // Reset values by form add redimir: 
     reset_form_by_event('modal_add_redimir', 'form_add_redimir');
-
+    // Event checkbox "soy_dueno":
     event_check_soy_dueno();
 });
 // Event lost focus in input identificacion: 
@@ -114,7 +114,7 @@ function send_email_bono(id_bono) {
     const bt_enviar_correo = document.getElementById('bt_enviar_correo');
     bt_enviar_correo.classList.remove('disabled');
     bt_enviar_correo.addEventListener('click', (e) => {
-        create_email(id_bono);
+        create_info_email(id_bono);
     });
 }
 // validate form recargar bono:
@@ -190,7 +190,7 @@ function events_register_cliente(message) {
     document.getElementById('container_create_bono').classList.remove('d-none');
     document.getElementById('container_info').classList.add('d-none');
 }
-
+// Event checkbox by id "soy_dueno": 
 function event_check_soy_dueno() {
     const checkbox = document.getElementById('soy_dueno');
     checkbox.addEventListener('change', () => {

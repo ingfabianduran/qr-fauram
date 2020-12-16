@@ -127,7 +127,7 @@ function print_bono_pdf(id_table) {
 function send_email_bono(id_table) {
     $(`#${id_table} tbody`).on('click', '.btn-warning', function() {
         const id = $(this).data('id');
-        create_email(id);
+        create_info_email(id);
     });
 }
 // Set data into form: 

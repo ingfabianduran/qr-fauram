@@ -8,7 +8,7 @@ class BonosSchema extends Schema {
     this.create('bonos', (table) => {
       table.increments()
       table.enu('tipo', ['Regalo', 'Recarga']).notNullable()
-      table.text('contenido', 'longtext').unique().notNullable()
+      table.string('contenido', 255).unique().notNullable()
       table.string('quien_redime', 80).defaultTo('No aplica')
       table.string('correo', 45)
       table.decimal('saldo').notNullable()

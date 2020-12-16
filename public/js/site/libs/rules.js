@@ -136,8 +136,8 @@ function get_rules() {
                 required: true,
                 email: true
             },
-            mensaje: {
-                required: true
+            file: {
+                required: true,
             }
         }
     };
